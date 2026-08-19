@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AuraMart - Customer Registration</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #eef2ff, #f8fafc);
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 20px;
+        }
+
+        .register-box {
+            width: 430px;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 18px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            text-align: center;
+
+            font-size: 30px;
+
+            font-weight: bold;
+
+            color: #4f46e5;
+
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: #64748b;
+
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+
+            margin: 13px 0 7px;
+
+            font-weight: bold;
+
+            color: #334155;
+        }
+
+        input,
+        textarea {
+
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid #cbd5e1;
+
+            border-radius: 9px;
+
+            outline: none;
+
+            font-size: 14px;
+        }
+
+        textarea {
+
+            resize: vertical;
+
+            min-height: 80px;
+        }
+
+        input:focus,
+        textarea:focus {
+
+            border-color: #4f46e5;
+        }
+
+        button {
+
+            width: 100%;
+
+            margin-top: 22px;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: #4f46e5;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        button:hover {
+
+            background: #3730a3;
+        }
+
+        .login-link {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 20px;
+
+            color: #4f46e5;
+
+            text-decoration: none;
+
+            font-weight: bold;
+        }
+
+        .home-link {
+
+            display: block;
+
+            text-align: center;
+
+            margin-top: 12px;
+
+            color: #64748b;
+
+            text-decoration: none;
+        }
+
+        .message {
+
+            display: none;
+
+            margin-top: 15px;
+
+            padding: 10px;
+
+            border-radius: 8px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="register-box">
+
+    <div class="logo">
+        AuraMart
+    </div>
+
+
+    <div class="subtitle">
+        Create your customer account
+    </div>
+
+
+    <form onsubmit="registerUser(event)">
+
+
+        <label>
+            Full Name
+        </label>
+
+        <input
+            type="text"
+            id="name"
+            placeholder="Enter your full name"
+            required
+        >
+
+
+        <label>
+            Email
+        </label>
+
+        <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+        >
+
+
+        <label>
+            Phone Number
+        </label>
+
+        <input
+            type="tel"
+            id="phone"
+            placeholder="Enter your phone number"
+            required
+        >
+
+
+        <label>
+            Password
+        </label>
+
+        <input
+            type="password"
+            id="password"
+            placeholder="Create password"
+            required
+        >
+
+
+        <label>
+            Confirm Password
+        </label>
+
+        <input
+            type="password"
+            id="confirmPassword"
+            placeholder="Confirm password"
+            required
+        >
+
+
+        <label>
+            Address
+        </label>
+
+        <textarea
+            id="address"
+            placeholder="Enter your delivery address"
+            required
+        ></textarea>
+
+
+        <button type="submit">
+
+            Create Account
+
+        </button>
+
+
+    </form>
+
+
+    <div
+        id="message"
+        class="message">
+    </div>
+
+
+    <a
+        href="login.html"
+        class="login-link">
+
+        Already have an account? Login
+
+    </a>
+
+
+    <a
+        href="index.html"
+        class="home-link">
+
+        ← Back to Home
+
+    </a>
+
+</div>
+
+
+
+<script>
+
+
+function registerUser(event) {
+
+    event.preventDefault();
+
+
+    const name =
+        document
+        .getElementById("name")
+        .value
+        .trim();
+
+
+    const email =
+        document
+        .getElementById("email")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const phone =
+        document
+        .getElementById("phone")
+        .value
+        .trim();
+
+
+    const password =
+        document
+        .getElementById("password")
+        .value;
+
+
+    const confirmPassword =
+        document
+        .getElementById("confirmPassword")
+        .value;
+
+
+    const address =
+        document
+        .getElementById("address")
+        .value
+        .trim();
+
+
+    const message =
+        document.getElementById("message");
+
+
+    /* =========================
+       PASSWORD CHECK
+    ========================= */
+
+    if (password !== confirmPassword) {
+
+        showMessage(
+            "Passwords do not match!",
+            "#fee2e2",
+            "#b91c1c"
+        );
+
+        return;
+    }
+
+
+    /* =========================
+       EXISTING CUSTOMER
+    ========================= */
+
+    const existingUser =
+        JSON.parse(
+            localStorage.getItem(
+                "auraMartCustomer"
+            )
+        );
+
+
+    if (
+        existingUser &&
+        existingUser.email === email
+    ) {
+
+        showMessage(
+            "This email is already registered. Please login.",
+            "#fef3c7",
+            "#92400e"
+        );
+
+        return;
+    }
+
+
+    /* =========================
+       CUSTOMER OBJECT
+    ========================= */
+
+    const customer = {
+
+        name: name,
+
+        email: email,
+
+        phone: phone,
+
+        password: password,
+
+        address: address,
+
+        registeredAt:
+            new Date().toISOString()
+
+    };
+
+
+    /* =========================
+       SAVE CUSTOMER
+    ========================= */
+
+    localStorage.setItem(
+        "auraMartCustomer",
+        JSON.stringify(customer)
+    );
+
+
+    /*
+       IMPORTANT
+
+       Check whether user came
+       from Place Order.
+    */
+
+    const checkout =
+        localStorage.getItem(
+            "auraMartCheckout"
+        );
+
+
+    /* =========================
+       NORMAL REGISTRATION
+    ========================= */
+
+    if (checkout !== "true") {
+
+        showMessage(
+            "Registration successful! Redirecting to login...",
+            "#dcfce7",
+            "#166534"
+        );
+
+
+        setTimeout(function() {
+
+            window.location.href =
+                "login.html";
+
+        }, 1200);
+
+
+        return;
+    }
+
+
+    /*
+       CHECKOUT REGISTRATION
+    */
+
+    localStorage.removeItem(
+        "auraMartCheckout"
+    );
+
+
+    /* Automatically login */
+
+    const loggedUser = {
+
+        name: customer.name,
+
+        email: customer.email,
+
+        phone: customer.phone,
+
+        address: customer.address,
+
+        loggedIn: true
+
+    };
+
+
+    localStorage.setItem(
+        "auraMartUser",
+        JSON.stringify(loggedUser)
+    );
+
+
+    showMessage(
+        "Customer details saved! Redirecting to order confirmation...",
+        "#dcfce7",
+        "#166534"
+    );
+
+
+    setTimeout(function() {
+
+        window.location.href =
+            "orders.html";
+
+    }, 1200);
+
+}
+
+
+
+/* =========================
+   MESSAGE FUNCTION
+========================= */
+
+function showMessage(
+    text,
+    background,
+    color
+) {
+
+    const message =
+        document.getElementById(
+            "message"
+        );
+
+
+    message.style.display =
+        "block";
+
+
+    message.style.background =
+        background;
+
+
+    message.style.color =
+        color;
+
+
+    message.innerText =
+        text;
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

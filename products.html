@@ -1,0 +1,1686 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AuraMart - Laptops</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        nav {
+            display: flex;
+            gap: 22px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .cart-link {
+            background: #0284c7;
+            padding: 8px 14px;
+            border-radius: 6px;
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        .page-title h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: #64748b;
+            font-size: 16px;
+        }
+
+        .products {
+            padding: 20px 7% 60px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .real-img {
+            width: 100%;
+            height: 200px;
+            object-fit: contain;
+            background: #e0f2fe;
+            display: block;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .price {
+            color: #0284c7;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        .cart-btn {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 7px;
+            background: #111827;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 15px;
+        }
+
+        .cart-btn:hover {
+            background: #0284c7;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        footer p {
+            margin: 5px;
+        }
+
+        @media (max-width: 1000px) {
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 500px) {
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            Aura<span>Mart</span>
+        </div>
+
+        <nav>
+
+            <a href="index.html">Home</a>
+
+            <a href="products.html">Products</a>
+
+            <a href="cart.html" class="cart-link">
+                🛒 Cart <span id="cartCount">0</span>
+            </a>
+
+            <a href="login.html">
+                Login
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    <!-- PAGE TITLE -->
+
+    <section class="page-title">
+
+        <h1>💻 Laptop Collection</h1>
+
+        <p>
+            Explore our latest laptops at the best prices
+        </p>
+
+    </section>
+    <!-- MOBILE 1 -->
+
+<div class="product">
+
+    <img src="images/mobile1.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Smartphone Pro</h3>
+
+        <div class="price">
+            ₹24,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Smartphone Pro',24999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE 2 -->
+
+<div class="product">
+
+    <img src="images/mobile2.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Galaxy Smartphone</h3>
+
+        <div class="price">
+            ₹29,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Galaxy Smartphone',29999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE 3 -->
+
+<div class="product">
+
+    <img src="images/mobile3.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Smartphone Ultra</h3>
+
+        <div class="price">
+            ₹34,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Smartphone Ultra',34999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE 4 -->
+
+<div class="product">
+
+    <img src="images/mobile4.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>5G Smartphone</h3>
+
+        <div class="price">
+            ₹21,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('5G Smartphone',21999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE 5 -->
+
+<div class="product">
+
+    <img src="images/mobile5.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Camera Smartphone</h3>
+
+        <div class="price">
+            ₹39,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Camera Smartphone',39999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE 6 -->
+
+<div class="product">
+
+    <img src="images/mobile6.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Budget Smartphone</h3>
+
+        <div class="price">
+            ₹14,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Budget Smartphone',14999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE 7 -->
+
+<div class="product">
+
+    <img src="images/mobile7.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Premium Smartphone</h3>
+
+        <div class="price">
+            ₹44,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Premium Smartphone',44999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE 8 -->
+
+<div class="product">
+
+    <img src="images/mobile8.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Android Smartphone</h3>
+
+        <div class="price">
+            ₹19,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Android Smartphone',19999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE 9 -->
+
+<div class="product">
+
+    <img src="images/mobile9.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Pro Max Smartphone</h3>
+
+        <div class="price">
+            ₹54,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Pro Max Smartphone',54999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- MOBILE 10 -->
+
+<div class="product">
+
+    <img src="images/mobile10.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Flagship Smartphone</h3>
+
+        <div class="price">
+            ₹59,999
+        </div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Flagship Smartphone',59999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+
+    <!-- PRODUCTS -->
+
+    <section class="products">
+
+
+        <!-- LAPTOP 1 -->
+
+        <div class="product">
+
+            <img src="images/laptop1.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Gaming Laptop Pro</h3>
+
+                <div class="price">
+                    ₹55,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Gaming Laptop Pro',55999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP 2 -->
+
+        <div class="product">
+
+            <img src="images/laptop2.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Business Laptop</h3>
+
+                <div class="price">
+                    ₹48,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Business Laptop',48999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP 3 -->
+
+        <div class="product">
+
+            <img src="images/laptop3.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Student Laptop</h3>
+
+                <div class="price">
+                    ₹42,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Student Laptop',42999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP 4 -->
+
+        <div class="product">
+
+            <img src="images/laptop4.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Ultra Slim Laptop</h3>
+
+                <div class="price">
+                    ₹62,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Ultra Slim Laptop',62999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP 5 -->
+
+        <div class="product">
+
+            <img src="images/laptop5.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Performance Laptop</h3>
+
+                <div class="price">
+                    ₹69,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Performance Laptop',69999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP 6 -->
+
+        <div class="product">
+
+            <img src="images/laptop6.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Creator Laptop</h3>
+
+                <div class="price">
+                    ₹74,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Creator Laptop',74999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP 7 -->
+
+        <div class="product">
+
+            <img src="images/laptop7.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Gaming Laptop X</h3>
+
+                <div class="price">
+                    ₹79,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Gaming Laptop X',79999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP 8 -->
+
+        <div class="product">
+
+            <img src="images/laptop8.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Core i5 Laptop</h3>
+
+                <div class="price">
+                    ₹51,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Core i5 Laptop',51999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP 9 -->
+
+        <div class="product">
+
+            <img src="images/laptop9.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Core i7 Laptop</h3>
+
+                <div class="price">
+                    ₹68,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Core i7 Laptop',68999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- LAPTOP 10 -->
+
+        <div class="product">
+
+            <img src="images/laptop10.jpg" class="real-img">
+
+            <div class="product-info">
+
+                <h3>Premium Laptop</h3>
+
+                <div class="price">
+                    ₹89,999
+                </div>
+
+                <button class="cart-btn"
+                    onclick="addToCart('Premium Laptop',89999)">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+
+    </section>
+<!-- HEADPHONES 1 -->
+
+<div class="product">
+
+    <img src="images/headphone1.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Wireless Headphones Pro</h3>
+
+        <div class="price">₹2,499</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Wireless Headphones Pro',2499)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEADPHONES 2 -->
+
+<div class="product">
+
+    <img src="images/headphone2.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Bluetooth Headphones</h3>
+
+        <div class="price">₹1,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Bluetooth Headphones',1999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEADPHONES 3 -->
+
+<div class="product">
+
+    <img src="images/headphone3.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Gaming Headset</h3>
+
+        <div class="price">₹3,499</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Gaming Headset',3499)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEADPHONES 4 -->
+
+<div class="product">
+
+    <img src="images/headphone4.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Noise Cancelling Headphones</h3>
+
+        <div class="price">₹4,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Noise Cancelling Headphones',4999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEADPHONES 5 -->
+
+<div class="product">
+
+    <img src="images/headphone5.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Premium Audio Headphones</h3>
+
+        <div class="price">₹5,499</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Premium Audio Headphones',5499)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEADPHONES 6 -->
+
+<div class="product">
+
+    <img src="images/headphone6.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Studio Headphones</h3>
+
+        <div class="price">₹3,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Studio Headphones',3999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEADPHONES 7 -->
+
+<div class="product">
+
+    <img src="images/headphone7.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Sports Wireless Headphones</h3>
+
+        <div class="price">₹2,799</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Sports Wireless Headphones',2799)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEADPHONES 8 -->
+
+<div class="product">
+
+    <img src="images/headphone8.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Over Ear Headphones</h3>
+
+        <div class="price">₹2,299</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Over Ear Headphones',2299)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEADPHONES 9 -->
+
+<div class="product">
+
+    <img src="images/headphone9.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Premium Wireless Headset</h3>
+
+        <div class="price">₹6,499</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Premium Wireless Headset',6499)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEADPHONES 10 -->
+
+<div class="product">
+
+    <img src="images/headphone10.jpg" class="real-img">
+
+    <div class="product-info">
+
+        <h3>Elite Gaming Headphones</h3>
+
+        <div class="price">₹7,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Elite Gaming Headphones',7999)">
+            Add to Cart
+        </button>
+
+    </div>
+
+</div>
+<!-- SMART WATCH 1 -->
+
+<div class="product">
+    <img src="images/watch1.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>Smart Watch Pro</h3>
+        <div class="price">₹3,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Smart Watch Pro',3999)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<!-- SMART WATCH 2 -->
+
+<div class="product">
+    <img src="images/watch2.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>Fitness Smart Watch</h3>
+        <div class="price">₹2,499</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Fitness Smart Watch',2499)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<!-- SMART WATCH 3 -->
+
+<div class="product">
+    <img src="images/watch3.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>Premium Smart Watch</h3>
+        <div class="price">₹5,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Premium Smart Watch',5999)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<!-- SMART WATCH 4 -->
+
+<div class="product">
+    <img src="images/watch4.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>Sports Smart Watch</h3>
+        <div class="price">₹3,299</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Sports Smart Watch',3299)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<!-- SMART WATCH 5 -->
+
+<div class="product">
+    <img src="images/watch5.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>Classic Smart Watch</h3>
+        <div class="price">₹4,499</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Classic Smart Watch',4499)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<!-- SMART WATCH 6 -->
+
+<div class="product">
+    <img src="images/watch6.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>AM Fitness Watch</h3>
+        <div class="price">₹2,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('AM Fitness Watch',2999)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<!-- SMART WATCH 7 -->
+
+<div class="product">
+    <img src="images/watch7.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>Smart Watch X</h3>
+        <div class="price">₹6,499</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Smart Watch X',6499)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<!-- SMART WATCH 8 -->
+
+<div class="product">
+    <img src="images/watch8.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>AM Pro Watch</h3>
+        <div class="price">₹4,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('AM Pro Watch',4999)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<!-- SMART WATCH 9 -->
+
+<div class="product">
+    <img src="images/watch9.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>Luxury Smart Watch</h3>
+        <div class="price">₹7,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Luxury Smart Watch',7999)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+
+<!-- SMART WATCH 10 -->
+
+<div class="product">
+    <img src="images/watch10.jpg" class="real-img">
+
+    <div class="product-info">
+        <h3>Elite Smart Watch</h3>
+        <div class="price">₹8,999</div>
+
+        <button class="cart-btn"
+            onclick="addToCart('Elite Smart Watch',8999)">
+            Add to Cart
+        </button>
+    </div>
+    <!-- KEYBOARD 1 -->
+<div class="product">
+    <img src="images/keyboard1.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Mechanical Gaming Keyboard</h3>
+        <div class="price">₹2,999</div>
+        <button class="cart-btn"
+            onclick="addToCart('Mechanical Gaming Keyboard',2999)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- KEYBOARD 2 -->
+<div class="product">
+    <img src="images/keyboard2.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Wireless Keyboard</h3>
+        <div class="price">₹1,499</div>
+        <button class="cart-btn"
+            onclick="addToCart('Wireless Keyboard',1499)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- KEYBOARD 3 -->
+<div class="product">
+    <img src="images/keyboard3.jpg" class="real-img">
+    <div class="product-info">
+        <h3>RGB Gaming Keyboard</h3>
+        <div class="price">₹3,499</div>
+        <button class="cart-btn"
+            onclick="addToCart('RGB Gaming Keyboard',3499)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- KEYBOARD 4 -->
+<div class="product">
+    <img src="images/keyboard4.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Compact Mechanical Keyboard</h3>
+        <div class="price">₹2,799</div>
+        <button class="cart-btn"
+            onclick="addToCart('Compact Mechanical Keyboard',2799)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- KEYBOARD 5 -->
+<div class="product">
+    <img src="images/keyboard5.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Professional Keyboard</h3>
+        <div class="price">₹2,199</div>
+        <button class="cart-btn"
+            onclick="addToCart('Professional Keyboard',2199)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- KEYBOARD 6 -->
+<div class="product">
+    <img src="images/keyboard6.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Office Wireless Keyboard</h3>
+        <div class="price">₹1,299</div>
+        <button class="cart-btn"
+            onclick="addToCart('Office Wireless Keyboard',1299)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- KEYBOARD 7 -->
+<div class="product">
+    <img src="images/keyboard7.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Gaming Pro Keyboard</h3>
+        <div class="price">₹4,499</div>
+        <button class="cart-btn"
+            onclick="addToCart('Gaming Pro Keyboard',4499)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- KEYBOARD 8 -->
+<div class="product">
+    <img src="images/keyboard8.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Ergonomic Keyboard</h3>
+        <div class="price">₹2,599</div>
+        <button class="cart-btn"
+            onclick="addToCart('Ergonomic Keyboard',2599)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- KEYBOARD 9 -->
+<div class="product">
+    <img src="images/keyboard9.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Premium Mechanical Keyboard</h3>
+        <div class="price">₹5,499</div>
+        <button class="cart-btn"
+            onclick="addToCart('Premium Mechanical Keyboard',5499)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- KEYBOARD 10 -->
+<div class="product">
+    <img src="images/keyboard10.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Elite RGB Keyboard</h3>
+        <div class="price">₹6,999</div>
+        <button class="cart-btn"
+            onclick="addToCart('Elite RGB Keyboard',6999)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- MOUSE 1 -->
+<div class="product">
+    <img src="images/mouse1.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Wireless Mouse Pro</h3>
+        <div class="price">₹999</div>
+        <button class="cart-btn"
+            onclick="addToCart('Wireless Mouse Pro',999)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- MOUSE 2 -->
+<div class="product">
+    <img src="images/mouse2.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Gaming Mouse</h3>
+        <div class="price">₹1,499</div>
+        <button class="cart-btn"
+            onclick="addToCart('Gaming Mouse',1499)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- MOUSE 3 -->
+<div class="product">
+    <img src="images/mouse3.jpg" class="real-img">
+    <div class="product-info">
+        <h3>RGB Gaming Mouse</h3>
+        <div class="price">₹1,799</div>
+        <button class="cart-btn"
+            onclick="addToCart('RGB Gaming Mouse',1799)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- MOUSE 4 -->
+<div class="product">
+    <img src="images/mouse4.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Ergonomic Wireless Mouse</h3>
+        <div class="price">₹1,299</div>
+        <button class="cart-btn"
+            onclick="addToCart('Ergonomic Wireless Mouse',1299)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- MOUSE 5 -->
+<div class="product">
+    <img src="images/mouse5.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Professional Mouse</h3>
+        <div class="price">₹1,099</div>
+        <button class="cart-btn"
+            onclick="addToCart('Professional Mouse',1099)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- MOUSE 6 -->
+<div class="product">
+    <img src="images/mouse6.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Precision Gaming Mouse</h3>
+        <div class="price">₹2,499</div>
+        <button class="cart-btn"
+            onclick="addToCart('Precision Gaming Mouse',2499)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- MOUSE 7 -->
+<div class="product">
+    <img src="images/mouse7.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Silent Click Mouse</h3>
+        <div class="price">₹899</div>
+        <button class="cart-btn"
+            onclick="addToCart('Silent Click Mouse',899)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- MOUSE 8 -->
+<div class="product">
+    <img src="images/mouse8.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Bluetooth Mouse</h3>
+        <div class="price">₹1,199</div>
+        <button class="cart-btn"
+            onclick="addToCart('Bluetooth Mouse',1199)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- MOUSE 9 -->
+<div class="product">
+    <img src="images/mouse9.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Compact Travel Mouse</h3>
+        <div class="price">₹699</div>
+        <button class="cart-btn"
+            onclick="addToCart('Compact Travel Mouse',699)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+
+<!-- MOUSE 10 -->
+<div class="product">
+    <img src="images/mouse10.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Elite Gaming Mouse</h3>
+        <div class="price">₹2,999</div>
+        <button class="cart-btn"
+            onclick="addToCart('Elite Gaming Mouse',2999)">
+            Add to Cart
+        </button>
+    </div>
+</div>
+<!-- MONITOR 1 -->
+<div class="product">
+    <img src="images/monitor1.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Full HD Monitor</h3>
+        <div class="price">₹8,999</div>
+        <button class="cart-btn" onclick="addToCart('Full HD Monitor',8999)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- MONITOR 2 -->
+<div class="product">
+    <img src="images/monitor2.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Gaming Monitor</h3>
+        <div class="price">₹14,999</div>
+        <button class="cart-btn" onclick="addToCart('Gaming Monitor',14999)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- MONITOR 3 -->
+<div class="product">
+    <img src="images/monitor3.jpg" class="real-img">
+    <div class="product-info">
+        <h3>IPS Display Monitor</h3>
+        <div class="price">₹11,499</div>
+        <button class="cart-btn" onclick="addToCart('IPS Display Monitor',11499)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- MONITOR 4 -->
+<div class="product">
+    <img src="images/monitor4.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Ultra Wide Monitor</h3>
+        <div class="price">₹18,999</div>
+        <button class="cart-btn" onclick="addToCart('Ultra Wide Monitor',18999)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- MONITOR 5 -->
+<div class="product">
+    <img src="images/monitor5.jpg" class="real-img">
+    <div class="product-info">
+        <h3>LED Monitor</h3>
+        <div class="price">₹7,499</div>
+        <button class="cart-btn" onclick="addToCart('LED Monitor',7499)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- MONITOR 6 -->
+<div class="product">
+    <img src="images/monitor6.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Professional Monitor</h3>
+        <div class="price">₹16,999</div>
+        <button class="cart-btn" onclick="addToCart('Professional Monitor',16999)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- MONITOR 7 -->
+<div class="product">
+    <img src="images/monitor7.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Curved Gaming Monitor</h3>
+        <div class="price">₹21,999</div>
+        <button class="cart-btn" onclick="addToCart('Curved Gaming Monitor',21999)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- MONITOR 8 -->
+<div class="product">
+    <img src="images/monitor8.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Business Monitor</h3>
+        <div class="price">₹9,999</div>
+        <button class="cart-btn" onclick="addToCart('Business Monitor',9999)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- MONITOR 9 -->
+<div class="product">
+    <img src="images/monitor9.jpg" class="real-img">
+    <div class="product-info">
+        <h3>4K Ultra HD Monitor</h3>
+        <div class="price">₹24,999</div>
+        <button class="cart-btn" onclick="addToCart('4K Ultra HD Monitor',24999)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- MONITOR 10 -->
+<div class="product">
+    <img src="images/monitor10.jpg" class="real-img">
+    <div class="product-info">
+        <h3>Premium Gaming Monitor</h3>
+        <div class="price">₹29,999</div>
+        <button class="cart-btn" onclick="addToCart('Premium Gaming Monitor',29999)">Add to Cart</button>
+    </div>
+</div>
+</section>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+            © 2026 AuraMart | Online Shopping Project
+        </p>
+
+        <p>
+            Designed for College Project
+        </p>
+
+    </footer>
+
+
+    <!-- CART JAVASCRIPT -->
+
+    <script>
+
+        const cart = JSON.parse(
+            localStorage.getItem("auraMartCart")
+        ) || [];
+
+
+        function addToCart(name, price) {
+
+            let existingProduct =
+                cart.find(item => item.name === name);
+
+
+            if (existingProduct) {
+
+                existingProduct.quantity++;
+
+            } else {
+
+                cart.push({
+
+                    name: name,
+
+                    price: price,
+
+                    quantity: 1
+
+                });
+
+            }
+
+<script>
+function addToCart(name, price) {
+
+    let existing = cart.find(item => item.name === name);
+
+    if (existing) {
+        existing.quantity++;
+    } else {
+        cart.push({
+            name: name,
+            price: Number(price),
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem(
+        "auraMartCart",
+        JSON.stringify(cart)
+    );
+
+    let count = 0;
+
+    cart.forEach(item => {
+        count += item.quantity;
+    });
+
+    let cartCount = document.getElementById("cartCount");
+
+    if (cartCount) {
+        cartCount.innerText = count;
+    }
+
+    alert(name + " added to cart!");
+}
+</script>
+<!-- CART LINK -->
+<a href="cart.html" class="cart-link">
+    🛒 Cart <span id="cartCount">0</span>
+</a>
+
+<style>
+    #cartCount {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 22px;
+        height: 22px;
+        padding: 0 6px;
+        margin-left: 5px;
+        border-radius: 50%;
+        background: red;
+        color: white;
+        font-size: 12px;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+/* =========================
+   AURAMART CART SYSTEM
+   ========================= */
+
+const cartKey = "auraMartCart";
+
+let cart = JSON.parse(localStorage.getItem(cartKey)) || [];
+
+
+/* ADD PRODUCT TO CART */
+function addToCart(name, price) {
+
+    let existingProduct = cart.find(function(item) {
+        return item.name === name;
+    });
+
+    if (existingProduct) {
+
+        existingProduct.quantity =
+            Number(existingProduct.quantity) + 1;
+
+    } else {
+
+        cart.push({
+            name: name,
+            price: Number(price),
+            quantity: 1
+        });
+    }
+
+    /* SAVE CART */
+    localStorage.setItem(
+        cartKey,
+        JSON.stringify(cart)
+    );
+
+    /* UPDATE NUMBER */
+    updateCartCount();
+
+    /* MESSAGE */
+    alert(name + " added to cart!");
+}
+
+
+/* UPDATE CART NUMBER */
+function updateCartCount() {
+
+    let totalItems = 0;
+
+    cart.forEach(function(item) {
+
+        totalItems += Number(item.quantity) || 0;
+
+    });
+
+    let cartCount =
+        document.getElementById("cartCount");
+
+    if (cartCount) {
+
+        cartCount.innerText = totalItems;
+
+    }
+}
+
+
+/* LOAD CART COUNT WHEN PAGE OPENS */
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        updateCartCount();
+
+    }
+);
+</script>
+<script>
+const CART_KEY = "auraMartCart";
+
+function getCart() {
+    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+}
+
+function addToCart(name, price) {
+
+    let cart = getCart();
+
+    let product = cart.find(function(item) {
+        return item.name === name;
+    });
+
+    if (product) {
+        product.quantity = Number(product.quantity) + 1;
+    } else {
+        cart.push({
+            name: name,
+            price: Number(price),
+            quantity: 1
+        });
+    }
+
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+
+    updateCartCount();
+
+    alert(name + " added to cart!");
+}
+
+function updateCartCount() {
+
+    let cart = getCart();
+
+    let total = 0;
+
+    cart.forEach(function(item) {
+        total += Number(item.quantity) || 0;
+    });
+
+    let countElement = document.getElementById("cartCount");
+
+    if (countElement) {
+        countElement.textContent = total;
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    updateCartCount();
+});
+</script>
+
+</body>
+</html>
+
+</body>
+</html>
