@@ -280,7 +280,7 @@ function placeOrder() {
 
         alert("Please login before placing your order.");
 
-        window.location.href = "login.html";
+        localStorage.setItem("auraMartCheckout", "true");`r`n        window.location.href = "login.html";
 
         return;
     }
@@ -327,3 +327,4 @@ displayCart();
 </body>
 </html>
 ```
+
