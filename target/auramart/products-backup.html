@@ -1,0 +1,541 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AuraMart - Products</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        header {
+            background: #111827;
+            color: white;
+            padding: 18px 7%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        nav {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: #38bdf8;
+        }
+
+        .cart-count {
+            background: #ef4444;
+            color: white;
+            padding: 2px 7px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-left: 3px;
+        }
+
+        .page-title {
+            text-align: center;
+            padding: 45px 20px 25px;
+        }
+
+        .page-title h1 {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .page-title p {
+            color: #64748b;
+        }
+
+        .products {
+            padding: 20px 7% 50px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 22px;
+        }
+
+        .product {
+            background: white;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: 0.3s;
+        }
+
+        .product:hover {
+            transform: translateY(-6px);
+        }
+
+        .product-img {
+            height: 180px;
+            background: #e0f2fe;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 75px;
+        }
+
+        .product-info {
+            padding: 18px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 8px;
+        }
+
+        .price {
+            color: #0284c7;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 14px;
+        }
+
+        .cart-btn {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 7px;
+            background: #111827;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .cart-btn:hover {
+            background: #0284c7;
+        }
+
+        footer {
+            background: #111827;
+            color: white;
+            text-align: center;
+            padding: 25px;
+        }
+
+        @media (max-width: 1000px) {
+
+            .products {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media (max-width: 750px) {
+
+            header {
+                flex-direction: column;
+            }
+
+            .products {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .products {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+
+<header>
+
+    <div class="logo">
+        Aura<span>Mart</span>
+    </div>
+
+    <nav>
+
+        <a href="index.html">Home</a>
+
+        <a href="products.html">Products</a>
+
+        <a href="cart.html">
+            🛒 Cart
+            <span class="cart-count" id="cartCount">0</span>
+        </a>
+
+        <a href="login.html">Login</a>
+
+        <a href="orders.html">Orders</a>
+
+    </nav>
+
+</header>
+
+
+<section class="page-title">
+
+    <h1>Our Products</h1>
+
+    <p>Choose your favourite products from AuraMart</p>
+
+</section>
+
+
+<section class="products">
+
+
+    <div class="product">
+
+        <div class="product-img">💻</div>
+
+        <div class="product-info">
+
+            <h3>Gaming Laptop</h3>
+
+            <div class="price">₹55,999</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Gaming Laptop', 55999)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">📱</div>
+
+        <div class="product-info">
+
+            <h3>Smart Phone</h3>
+
+            <div class="price">₹24,999</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Smart Phone', 24999)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">🎧</div>
+
+        <div class="product-info">
+
+            <h3>Wireless Headphones</h3>
+
+            <div class="price">₹2,499</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Wireless Headphones', 2499)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">⌚</div>
+
+        <div class="product-info">
+
+            <h3>Smart Watch</h3>
+
+            <div class="price">₹3,999</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Smart Watch', 3999)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">⌨️</div>
+
+        <div class="product-info">
+
+            <h3>Mechanical Keyboard</h3>
+
+            <div class="price">₹2,999</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Mechanical Keyboard', 2999)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">🖱️</div>
+
+        <div class="product-info">
+
+            <h3>Wireless Mouse</h3>
+
+            <div class="price">₹999</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Wireless Mouse', 999)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">🖥️</div>
+
+        <div class="product-info">
+
+            <h3>Full HD Monitor</h3>
+
+            <div class="price">₹12,999</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Full HD Monitor', 12999)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">🔊</div>
+
+        <div class="product-info">
+
+            <h3>Bluetooth Speaker</h3>
+
+            <div class="price">₹1,799</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Bluetooth Speaker', 1799)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">🔋</div>
+
+        <div class="product-info">
+
+            <h3>Power Bank</h3>
+
+            <div class="price">₹1,499</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Power Bank', 1499)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">📷</div>
+
+        <div class="product-info">
+
+            <h3>Digital Camera</h3>
+
+            <div class="price">₹29,999</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Digital Camera', 29999)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">🎮</div>
+
+        <div class="product-info">
+
+            <h3>Gaming Controller</h3>
+
+            <div class="price">₹2,499</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('Gaming Controller', 2499)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="product">
+
+        <div class="product-img">💾</div>
+
+        <div class="product-info">
+
+            <h3>External SSD</h3>
+
+            <div class="price">₹6,499</div>
+
+            <button class="cart-btn"
+                onclick="addToCart('External SSD', 6499)">
+                Add to Cart
+            </button>
+
+        </div>
+
+    </div>
+
+
+</section>
+
+
+<footer>
+
+    <p>© 2026 AuraMart | Online Shopping Project</p>
+
+    <p>Designed for College Project</p>
+
+</footer>
+
+
+<script>
+
+let cart =
+    JSON.parse(localStorage.getItem("auraMartCart")) || [];
+
+
+function addToCart(name, price) {
+
+    const existingProduct =
+        cart.find(item => item.name === name);
+
+
+    if (existingProduct) {
+
+        existingProduct.quantity =
+            (Number(existingProduct.quantity) || 1) + 1;
+
+    } else {
+
+        cart.push({
+
+            name: name,
+
+            price: price,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    localStorage.setItem(
+        "auraMartCart",
+        JSON.stringify(cart)
+    );
+
+
+    updateCartCount();
+
+
+    alert(name + " added to cart! 🛒");
+
+}
+
+
+function updateCartCount() {
+
+    const count =
+        cart.reduce(
+            (total, item) =>
+                total + (Number(item.quantity) || 1),
+            0
+        );
+
+
+    document.getElementById("cartCount").innerText = count;
+
+}
+
+
+updateCartCount();
+
+</script>
+
+
+</body>
+
+</html>
+```
