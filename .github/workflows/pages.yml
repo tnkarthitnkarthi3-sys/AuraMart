@@ -29,10 +29,22 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Prepare AuraMart website
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp login.html _site/
+          cp register.html _site/
+          cp products.html _site/
+          cp cart.html _site/
+          cp orders.html _site/
+          cp script.js _site/
+          cp -r images _site/
+
       - name: Upload AuraMart website
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./src/main/webapp
+          path: ./_site
 
       - name: Deploy to GitHub Pages
         id: deployment
