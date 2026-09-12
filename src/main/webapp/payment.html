@@ -1,0 +1,577 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuraMart - Secure Payment</title>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:linear-gradient(135deg,#f5f7ff,#eef2ff);
+    min-height:100vh;
+    color:#172033;
+}
+.navbar{
+    background:#111827;
+    color:white;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+.logo{
+    font-size:25px;
+    font-weight:800;
+    letter-spacing:.5px;
+}
+.secure{
+    font-size:14px;
+    opacity:.85;
+}
+.container{
+    max-width:1050px;
+    margin:45px auto;
+    padding:0 20px;
+}
+.title{
+    text-align:center;
+    margin-bottom:30px;
+}
+.title h1{font-size:32px;margin-bottom:8px}
+.title p{color:#667085}
+.payment-box{
+    display:grid;
+    grid-template-columns:1.5fr 1fr;
+    gap:25px;
+}
+.card{
+    background:white;
+    border-radius:18px;
+    padding:28px;
+    box-shadow:0 10px 35px rgba(0,0,0,.08);
+}
+.card h2{
+    margin-bottom:22px;
+    font-size:21px;
+}
+.methods{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin-bottom:25px;
+}
+.method{
+    border:1.5px solid #d9deea;
+    border-radius:12px;
+    padding:15px 8px;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+    font-weight:600;
+}
+.method:hover{border-color:#6366f1}
+.method.active{
+    border-color:#4f46e5;
+    background:#eef2ff;
+    color:#4338ca;
+}
+.form-group{margin-bottom:17px}
+label{
+    display:block;
+    font-size:14px;
+    font-weight:600;
+    margin-bottom:7px;
+}
+input{
+    width:100%;
+    padding:13px;
+    border:1px solid #d0d5dd;
+    border-radius:9px;
+    outline:none;
+    font-size:15px;
+}
+input:focus{border-color:#6366f1}
+.row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+}
+.pay-btn{
+    width:100%;
+    border:0;
+    padding:15px;
+    border-radius:10px;
+    background:linear-gradient(135deg,#4f46e5,#7c3aed);
+    color:white;
+    font-size:16px;
+    font-weight:700;
+    cursor:pointer;
+    margin-top:8px;
+}
+.pay-btn:hover{opacity:.92}
+.summary-item{
+    display:flex;
+    justify-content:space-between;
+    padding:12px 0;
+    border-bottom:1px solid #eee;
+    color:#555;
+}
+.total{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+    font-size:21px;
+    font-weight:800;
+}
+.badges{
+    margin-top:25px;
+    padding:15px;
+    background:#f8fafc;
+    border-radius:10px;
+    text-align:center;
+    font-size:13px;
+    color:#667085;
+}
+.cod-box,.upi-box{display:none}
+.cod-box.show,.upi-box.show{display:block}
+#cardSection{display:block}
+.success{
+    display:none;
+    text-align:center;
+    padding:45px 20px;
+}
+.success-icon{
+    width:75px;height:75px;
+    margin:auto auto 18px;
+    border-radius:50%;
+    background:#dcfce7;
+    color:#16a34a;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:40px;
+}
+.success h2{font-size:28px;margin-bottom:10px}
+.success p{color:#667085;margin-bottom:22px}
+.continue{
+    display:inline-block;
+    padding:13px 25px;
+    background:#111827;
+    color:white;
+    text-decoration:none;
+    border-radius:9px;
+    font-weight:700;
+}
+@media(max-width:750px){
+    .payment-box{grid-template-columns:1fr}
+    .methods{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="navbar">
+    <div class="logo">AuraMart</div>
+    <div class="secure">🔒 Secure Checkout</div>
+</div>
+
+<div class="container">
+
+<div class="title">
+    <h1>Complete Your Payment</h1>
+    <p>Choose your preferred payment method</p>
+</div>
+
+<div class="payment-box" id="paymentContent">
+
+<div class="card">
+
+<h2>Payment Method</h2>
+
+<div class="methods">
+    <div class="method active" onclick="selectMethod('card',this)">💳<br>Card</div>
+    <div class="method" onclick="selectMethod('upi',this)">📱<br>UPI</div>
+    <div class="method" onclick="selectMethod('cod',this)">📦<br>Cash on Delivery</div>
+</div>
+
+<div id="cardSection">
+
+<div class="form-group">
+<label>Card Holder Name</label>
+<input id="cardName" type="text" placeholder="Enter card holder name">
+</div>
+
+<div class="form-group">
+<label>Card Number</label>
+<input id="cardNumber" type="text" maxlength="19"
+placeholder="XXXX XXXX XXXX XXXX"
+oninput="formatCard(this)">
+</div>
+
+<div class="row">
+<div class="form-group">
+<label>Expiry Date</label>
+<input id="expiry" type="text" maxlength="5" placeholder="MM/YY">
+</div>
+
+<div class="form-group">
+<label>CVV</label>
+<input id="cvv" type="password" maxlength="3" placeholder="•••">
+</div>
+</div>
+
+</div>
+
+<div id="upiSection" class="upi-box">
+<div class="form-group">
+<label>UPI ID</label>
+<input id="upiId" type="text" placeholder="example@upi">
+</div>
+</div>
+
+<div id="codSection" class="cod-box">
+<div class="badges">
+    📦 Pay when your order is delivered.<br>
+    No advance payment required.
+</div>
+</div>
+
+<button class="pay-btn" onclick="processPayment()">
+    🔒 Pay Securely
+</button>
+
+<div class="badges">
+    🛡️ Safe & Secure &nbsp; • &nbsp; 🔐 Your information is protected
+</div>
+
+</div>
+
+<div class="card">
+
+<h2>Order Summary</h2>
+
+<div class="summary-item">
+<span>Subtotal</span>
+<strong id="subtotal">₹0</strong>
+</div>
+
+<div class="summary-item">
+<span>Delivery</span>
+<strong id="delivery">₹50</strong>
+</div>
+
+<div class="summary-item">
+<span>Service Charge</span>
+<strong id="service">₹10</strong>
+</div>
+
+<div class="total">
+<span>Total</span>
+<span id="total">₹0</span>
+</div>
+
+<div class="badges">
+    🚚 Fast Delivery<br>
+    🔄 Easy Returns<br>
+    ⭐ Trusted Shopping Experience
+</div>
+
+</div>
+
+</div>
+
+<div class="card success" id="successBox">
+<div class="success-icon">✓</div>
+<h2>Payment Successful!</h2>
+<p>Your order has been placed successfully.</p>
+<a href="orders.html" class="continue">View My Orders</a>
+</div>
+
+</div>
+
+<script>
+
+let selectedMethod = "card";
+
+function getAmount(){
+    let total = localStorage.getItem("auraMartPaymentTotal");
+
+    if(!total){
+        let cart = JSON.parse(localStorage.getItem("auraMartCart") || "[]");
+        let subtotal = cart.reduce((sum,item)=>{
+            return sum + ((Number(item.price)||0) * (Number(item.quantity)||1));
+        },0);
+
+        total = subtotal + 60;
+    }
+
+    return Number(total) || 0;
+}
+
+function loadSummary(){
+
+    let total = getAmount();
+    let subtotal = Math.max(0,total - 60);
+
+    document.getElementById("subtotal").innerText =
+        "₹" + subtotal.toFixed(2);
+
+    document.getElementById("delivery").innerText = "₹50.00";
+    document.getElementById("service").innerText = "₹10.00";
+    document.getElementById("total").innerText =
+        "₹" + total.toFixed(2);
+}
+
+function selectMethod(method,element){
+
+    selectedMethod = method;
+
+    document.querySelectorAll(".method")
+        .forEach(x=>x.classList.remove("active"));
+
+    element.classList.add("active");
+
+    document.getElementById("cardSection").style.display =
+        method === "card" ? "block" : "none";
+
+    document.getElementById("upiSection").className =
+        method === "upi" ? "upi-box show" : "upi-box";
+
+    document.getElementById("codSection").className =
+        method === "cod" ? "cod-box show" : "cod-box";
+}
+
+function formatCard(input){
+
+    let value = input.value.replace(/\D/g,"").substring(0,16);
+    input.value = value.replace(/(.{4})/g,"$1 ").trim();
+}
+
+function processPayment(){
+
+    if(selectedMethod === "card"){
+
+        let name =
+            document.getElementById("cardName").value.trim();
+
+        let number =
+            document.getElementById("cardNumber")
+            .value.replace(/\s/g,"");
+
+        let expiry =
+            document.getElementById("expiry").value.trim();
+
+        let cvv =
+            document.getElementById("cvv").value.trim();
+
+        if(
+            !name ||
+            number.length !== 16 ||
+            !expiry ||
+            cvv.length !== 3
+        ){
+            alert("Please enter valid payment details.");
+            return;
+        }
+    }
+
+    if(selectedMethod === "upi"){
+
+        let upi =
+            document.getElementById("upiId").value.trim();
+
+        if(!upi || !upi.includes("@")){
+            alert("Please enter a valid UPI ID.");
+            return;
+        }
+    }
+
+    /*
+     * COD does not require payment details.
+     */
+
+    const cart =
+        JSON.parse(
+            localStorage.getItem("auraMartCheckoutCart") || "[]"
+        );
+
+    const address =
+        localStorage.getItem("auraMartCheckoutAddress") || "";
+
+    const totalAmount =
+        Number(
+            localStorage.getItem("auraMartPaymentTotal") || 0
+        );
+
+    if(cart.length === 0){
+        alert("Checkout session expired. Please return to cart.");
+        window.location.href = "cart.html";
+        return;
+    }
+
+    if(!address){
+        alert("Delivery address missing.");
+        window.location.href = "cart.html";
+        return;
+    }
+
+    /*
+     * Payment completed.
+     */
+
+    const orderId =
+        "AM" + Date.now();
+
+    localStorage.setItem(
+        "auraMartPaymentStatus",
+        "success"
+    );
+
+    localStorage.setItem(
+        "auraMartOrderId",
+        orderId
+    );
+
+    localStorage.setItem(
+        "auraMartPaymentMethod",
+        selectedMethod
+    );
+
+    /*
+     * Create the actual AuraMart order.
+     */
+
+    const form =
+        document.createElement("form");
+
+    form.method = "POST";
+    form.action = "place-order";
+
+    function addOrderField(name,value){
+
+        const input =
+            document.createElement("input");
+
+        input.type = "hidden";
+        input.name = name;
+        input.value = value;
+
+        form.appendChild(input);
+    }
+
+    const subtotal =
+        Math.max(0,totalAmount - 60);
+
+    addOrderField(
+        "subtotal",
+        subtotal
+    );
+
+    addOrderField(
+        "deliveryCharge",
+        50
+    );
+
+    addOrderField(
+        "serviceCharge",
+        10
+    );
+
+    addOrderField(
+        "totalAmount",
+        totalAmount
+    );
+
+    addOrderField(
+        "deliveryAddress",
+        address
+    );
+
+    cart.forEach(item => {
+
+        addOrderField(
+            "productId",
+            item.id
+        );
+
+        addOrderField(
+            "quantity",
+            Number(item.quantity) || 1
+        );
+
+        addOrderField(
+            "price",
+            Number(item.price) || 0
+        );
+
+    });
+
+    /*
+     * Clear cart before submitting.
+     * Backend order has all required data.
+     */
+
+    localStorage.removeItem("auraMartCart");
+
+    document.body.innerHTML = `
+        <div style="
+            min-height:100vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:linear-gradient(135deg,#f5f7ff,#eef2ff);
+            font-family:Arial,sans-serif;
+        ">
+            <div style="
+                background:white;
+                padding:45px;
+                border-radius:20px;
+                text-align:center;
+                box-shadow:0 15px 40px rgba(0,0,0,.10);
+                max-width:450px;
+            ">
+                <div style="
+                    font-size:50px;
+                    margin-bottom:15px;
+                ">✓</div>
+
+                <h2 style="
+                    margin-bottom:10px;
+                    color:#16a34a;
+                ">
+                    Payment Successful!
+                </h2>
+
+                <p style="
+                    color:#667085;
+                    margin-bottom:8px;
+                ">
+                    Processing your AuraMart order...
+                </p>
+
+                <p style="
+                    color:#98a2b3;
+                    font-size:13px;
+                ">
+                    Order ID: ${orderId}
+                </p>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(form);
+
+    setTimeout(() => {
+        form.submit();
+    }, 1000);
+}
+loadSummary();
+
+</script>
+
+</body>
+</html>
+

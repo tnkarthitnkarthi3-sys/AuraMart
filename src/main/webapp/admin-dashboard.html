@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AuraMart Admin Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f4f6;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: #111827;
+            color: white;
+            padding: 18px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 25px;
+            font-weight: bold;
+        }
+
+        .admin-name {
+            font-size: 15px;
+            color: #d1d5db;
+        }
+
+        .container {
+            padding: 35px;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .welcome p {
+            color: #6b7280;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .card h3 {
+            color: #374151;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 30px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+
+        .section {
+            margin-top: 35px;
+            background: white;
+            padding: 28px;
+            border-radius: 15px;
+            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+        }
+
+        .section h2 {
+            color: #111827;
+            margin-bottom: 15px;
+        }
+
+        .menu {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .menu button {
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .menu button:hover {
+            background: #1d4ed8;
+        }
+    </style>
+</head>
+
+<body>
+
+<header class="header">
+
+    <div class="logo">
+        AuraMart Admin
+    </div>
+
+    <div class="admin-name">
+        Administrator
+    </div>
+
+</header>
+
+<main class="container">
+
+    <div class="welcome">
+        <h1>Welcome to Admin Dashboard 👋</h1>
+        <p>Manage your AuraMart store from here.</p>
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>Total Products</h3>
+            <p id="statValue1">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Users</h3>
+            <p id="statValue2">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Total Orders</h3>
+            <p id="statValue3">0</p>
+        </div>
+
+        <div class="card">
+            <h3>Pending Orders</h3>
+            <p id="statValue4">0</p>
+        </div>
+
+    </div>
+
+    <div class="section">
+
+        <h2>Quick Management</h2>
+
+        <div class="menu">
+
+            <button type="button" onclick="window.location.href='admin-products'">Manage Products</button>
+
+            <button type="button">
+                Manage Users
+            </button>
+
+            <button type="button" onclick="window.location.href='orders.html'">Manage Orders</button>
+
+        </div>
+
+    </div>
+
+</main>
+
+<script>
+fetch("admin-dashboard-data", {
+    method: "GET",
+    credentials: "include",
+    cache: "no-store"
+})
+.then(function(response) {
+    if (!response.ok) {
+        throw new Error("Dashboard API failed: " + response.status);
+    }
+    return response.json();
+})
+.then(function(data) {
+
+    document.getElementById("statValue1").innerText =
+        data.totalProducts;
+
+    document.getElementById("statValue2").innerText =
+        data.totalUsers;
+
+    document.getElementById("statValue3").innerText =
+        data.totalOrders;
+
+    document.getElementById("statValue4").innerText =
+        data.pendingOrders;
+
+})
+.catch(function(error) {
+    console.error("ADMIN DASHBOARD ERROR:", error);
+});
+</script></body>
+</html>

@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AuraMart - Cart</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f6f8;
+    color:#222;
+}
+
+header{
+    background:#111827;
+    color:white;
+    padding:18px 35px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:28px;
+    font-weight:bold;
+}
+
+nav{
+    display:flex;
+    gap:20px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:bold;
+}
+
+.container{
+    max-width:1100px;
+    margin:40px auto;
+    padding:20px;
+}
+
+h1{
+    margin-bottom:25px;
+}
+
+.cart-item{
+    background:white;
+    padding:20px;
+    margin-bottom:15px;
+    border-radius:12px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.item-info{
+    flex:1;
+}
+
+.item-info h3{
+    margin-bottom:8px;
+}
+
+.item-price{
+    color:#e11d48;
+    font-weight:bold;
+}
+
+.quantity{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.quantity button{
+    width:32px;
+    height:32px;
+    border:none;
+    border-radius:5px;
+    background:#111827;
+    color:white;
+    cursor:pointer;
+}
+
+.remove-btn{
+    width:auto !important;
+    padding:0 12px;
+    background:#dc2626 !important;
+}
+
+.summary{
+    background:white;
+    padding:25px;
+    margin-top:25px;
+    border-radius:12px;
+    box-shadow:0 3px 10px rgba(0,0,0,.08);
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    margin:10px 0;
+    font-size:17px;
+}
+
+.grand-total{
+    border-top:1px solid #ddd;
+    margin-top:15px;
+    padding-top:15px;
+    font-size:25px;
+    font-weight:bold;
+}
+
+.address-box{
+    margin-top:25px;
+}
+
+.address-box label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.address-box textarea{
+    width:100%;
+    min-height:100px;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:15px;
+    resize:vertical;
+}
+
+.order-btn{
+    width:100%;
+    margin-top:20px;
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    background:#16a34a;
+    color:white;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.order-btn:hover{
+    background:#15803d;
+}
+
+.empty{
+    text-align:center;
+    background:white;
+    padding:50px;
+    border-radius:12px;
+}
+
+.shop-btn{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#111827;
+    color:white;
+    text-decoration:none;
+    border-radius:7px;
+}
+
+@media(max-width:700px){
+
+    header{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+
+    .cart-item{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .quantity{
+        width:100%;
+        flex-wrap:wrap;
+    }
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+
+```
+<div class="logo">
+    AuraMart
+</div>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="products">Products</a>
+    <a href="cart.html">Cart</a>
+    <a href="orders.html">Orders</a>
+    <a href="login.html">Login</a>
+</nav>
+```
+
+</header>
+
+<div class="container">
+
+```
+<h1>Your Cart</h1>
+
+<div id="cartItems"></div>
+
+
+<div
+    class="summary"
+    id="summary"
+    style="display:none;"
+>
+
+    <div class="summary-row">
+
+        <span>Subtotal</span>
+
+        <strong>
+            ₹<span id="subtotal">0</span>
+        </strong>
+
+    </div>
+
+
+    <div class="summary-row">
+
+        <span>Delivery Charge</span>
+
+        <strong>
+            ₹<span id="delivery">50</span>
+        </strong>
+
+    </div>
+
+
+    <div class="summary-row">
+
+        <span>Service Charge</span>
+
+        <strong>
+            ₹<span id="service">10</span>
+        </strong>
+
+    </div>
+
+
+    <div class="summary-row grand-total">
+
+        <span>Total</span>
+
+        <span>
+            ₹<span id="total">0</span>
+        </span>
+
+    </div>
+
+
+    <div class="address-box">
+
+        <label for="deliveryAddress">
+            Delivery Address
+        </label>
+
+        <textarea
+            id="deliveryAddress"
+            placeholder="Enter your complete delivery address"
+            required
+        ></textarea>
+
+    </div>
+
+
+    <button
+        type="button"
+        class="order-btn"
+        onclick="placeOrder()"
+    >
+        Place Order
+    </button>
+
+</div>
+```
+
+</div>
+
+<script>
+
+const CART_KEY = "auraMartCart";
+
+
+function getCart(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(CART_KEY)
+        ) || [];
+
+    }catch(error){
+
+        console.error(
+            "Cart loading error:",
+            error
+        );
+
+        return [];
+
+    }
+
+}
+
+
+function saveCart(cart){
+
+    localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+    );
+
+}
+
+
+function money(value){
+
+    return Number(value || 0)
+        .toLocaleString("en-IN");
+
+}
+
+
+function displayCart(){
+
+    const cart = getCart();
+
+    const container =
+        document.getElementById("cartItems");
+
+    const summary =
+        document.getElementById("summary");
+
+    container.innerHTML = "";
+
+
+    if(cart.length === 0){
+
+        summary.style.display = "none";
+
+        container.innerHTML = `
+            <div class="empty">
+
+                <h2>Your cart is empty</h2>
+
+                <p>
+                    Add some products first.
+                </p>
+
+                <a
+                    href="products"
+                    class="shop-btn"
+                >
+                    Continue Shopping
+                </a>
+
+            </div>
+        `;
+
+        return;
+
+    }
+
+
+    summary.style.display = "block";
+
+
+    let subtotal = 0;
+
+
+    cart.forEach((item,index)=>{
+
+        const quantity =
+            Number(item.quantity) || 1;
+
+        const price =
+            Number(item.price) || 0;
+
+        const itemTotal =
+            price * quantity;
+
+
+        subtotal += itemTotal;
+
+
+        container.innerHTML += `
+
+            <div class="cart-item">
+
+                <div class="item-info">
+
+                    <h3>
+                        ${item.name || "Product"}
+                    </h3>
+
+                    <div class="item-price">
+                        ₹${money(price)}
+                    </div>
+
+                </div>
+
+
+                <div class="quantity">
+
+                    <button
+                        type="button"
+                        onclick="decreaseQuantity(${index})"
+                    >
+                        -
+                    </button>
+
+
+                    <strong>
+                        ${quantity}
+                    </strong>
+
+
+                    <button
+                        type="button"
+                        onclick="increaseQuantity(${index})"
+                    >
+                        +
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="remove-btn"
+                        onclick="removeItem(${index})"
+                    >
+                        Remove
+                    </button>
+
+                </div>
+
+
+                <strong>
+                    ₹${money(itemTotal)}
+                </strong>
+
+            </div>
+
+        `;
+
+    });
+
+
+    const delivery = 50;
+
+    const service = 10;
+
+    const total =
+        subtotal +
+        delivery +
+        service;
+
+
+    document.getElementById(
+        "subtotal"
+    ).innerText = money(subtotal);
+
+
+    document.getElementById(
+        "delivery"
+    ).innerText = money(delivery);
+
+
+    document.getElementById(
+        "service"
+    ).innerText = money(service);
+
+
+    document.getElementById(
+        "total"
+    ).innerText = money(total);
+
+}
+
+
+function increaseQuantity(index){
+
+    let cart = getCart();
+
+    if(!cart[index]){
+        return;
+    }
+
+
+    cart[index].quantity =
+        Number(cart[index].quantity || 1) + 1;
+
+
+    saveCart(cart);
+
+    displayCart();
+
+}
+
+
+function decreaseQuantity(index){
+
+    let cart = getCart();
+
+    if(!cart[index]){
+        return;
+    }
+
+
+    cart[index].quantity =
+        Number(cart[index].quantity || 1) - 1;
+
+
+    if(cart[index].quantity <= 0){
+
+        cart.splice(index,1);
+
+    }
+
+
+    saveCart(cart);
+
+    displayCart();
+
+}
+
+
+function removeItem(index){
+
+    let cart = getCart();
+
+    if(!cart[index]){
+        return;
+    }
+
+
+    cart.splice(index,1);
+
+    saveCart(cart);
+
+    displayCart();
+
+}
+
+
+function addField(
+    form,
+    name,
+    value
+){
+
+    const input =
+        document.createElement("input");
+
+    input.type = "hidden";
+
+    input.name = name;
+
+    input.value = value;
+
+    form.appendChild(input);
+
+}
+
+
+function placeOrder(){
+
+    console.log(
+        "AURAMART PLACE ORDER STARTED"
+    );
+
+
+    const cart = getCart();
+
+
+    if(cart.length === 0){
+
+        alert(
+            "Your cart is empty!"
+        );
+
+        return;
+
+    }
+
+
+    const addressElement =
+        document.getElementById(
+            "deliveryAddress"
+        );
+
+
+    const address =
+        addressElement.value.trim();
+
+
+    if(!address){
+
+        alert(
+            "Please enter delivery address."
+        );
+
+        addressElement.focus();
+
+        return;
+
+    }
+
+
+    let subtotal = 0;
+
+
+    cart.forEach(item => {
+
+        const price =
+            Number(item.price) || 0;
+
+        const quantity =
+            Number(item.quantity) || 1;
+
+
+        subtotal +=
+            price * quantity;
+
+    });
+
+
+    const deliveryCharge = 50;
+
+    const serviceCharge = 10;
+
+    const totalAmount =
+        subtotal +
+        deliveryCharge +
+        serviceCharge;
+
+
+    console.log(
+        "SUBTOTAL =",
+        subtotal
+    );
+
+    console.log(
+        "TOTAL =",
+        totalAmount
+    );
+
+
+    const form =
+        document.createElement("form");
+
+
+    form.method = "POST";
+
+
+    /*
+     * IMPORTANT:
+     * Always submit to the current
+     * AuraMart application.
+     */
+
+    form.action =
+        "/auramart/place-order";
+
+
+    addField(
+        form,
+        "subtotal",
+        subtotal
+    );
+
+
+    addField(
+        form,
+        "deliveryCharge",
+        deliveryCharge
+    );
+
+
+    addField(
+        form,
+        "serviceCharge",
+        serviceCharge
+    );
+
+
+    addField(
+        form,
+        "totalAmount",
+        totalAmount
+    );
+
+
+    addField(
+        form,
+        "deliveryAddress",
+        address
+    );
+
+
+    cart.forEach(item => {
+
+        addField(
+            form,
+            "productId",
+            item.id
+        );
+
+
+        addField(
+            form,
+            "quantity",
+            Number(item.quantity) || 1
+        );
+
+
+        addField(
+            form,
+            "price",
+            Number(item.price) || 0
+        );
+
+    });
+
+
+    document.body.appendChild(form);
+
+    console.log(
+        "SUBMITTING TO:",
+        form.action
+    );
+
+    form.submit();
+}
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    displayCart
+);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,1033 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>AuraMart | My Cart</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:
+        radial-gradient(circle at top left,#eef2ff,transparent 30%),
+        radial-gradient(circle at bottom right,#fce7f3,transparent 25%),
+        #f8fafc;
+    color:#172033;
+    min-height:100vh;
+}
+
+.topbar{
+    position:sticky;
+    top:0;
+    z-index:1000;
+    background:linear-gradient(135deg,#111827,#312e81);
+    color:#fff;
+    padding:15px 5%;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:20px;
+    box-shadow:0 5px 25px rgba(15,23,42,.15);
+}
+
+.brand{
+    font-size:26px;
+    font-weight:950;
+}
+
+.brand span{
+    color:#facc15;
+}
+
+.nav{
+    display:flex;
+    gap:9px;
+}
+
+.nav a{
+    text-decoration:none;
+    color:#fff;
+    padding:9px 13px;
+    border-radius:10px;
+    font-size:13px;
+    font-weight:800;
+}
+
+.nav a:hover{
+    background:rgba(255,255,255,.12);
+}
+
+.page{
+    max-width:1250px;
+    margin:35px auto 70px;
+    padding:0 5%;
+}
+
+.heading{
+    margin-bottom:25px;
+}
+
+.heading h1{
+    font-size:36px;
+    font-weight:950;
+    margin-bottom:5px;
+}
+
+.heading p{
+    color:#64748b;
+    font-size:14px;
+}
+
+.layout{
+    display:grid;
+    grid-template-columns:minmax(0,1.7fr) minmax(320px,.9fr);
+    gap:24px;
+    align-items:start;
+}
+
+.cart-box,
+.summary{
+    background:rgba(255,255,255,.93);
+    border:1px solid #e5e7eb;
+    border-radius:22px;
+    box-shadow:0 15px 45px rgba(15,23,42,.07);
+}
+
+.cart-box{
+    overflow:hidden;
+}
+
+.cart-header{
+    padding:20px 22px;
+    border-bottom:1px solid #eef2f7;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.cart-header h2{
+    font-size:19px;
+    font-weight:900;
+}
+
+.cart-count{
+    background:#eef2ff;
+    color:#4338ca;
+    padding:7px 11px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:900;
+}
+
+.cart-list{
+    padding:10px 20px 20px;
+}
+
+.cart-item{
+    display:grid;
+    grid-template-columns:110px minmax(0,1fr) auto;
+    gap:18px;
+    padding:20px 0;
+    border-bottom:1px solid #eef2f7;
+}
+
+.cart-item:last-child{
+    border-bottom:none;
+}
+
+.product-image{
+    width:110px;
+    height:110px;
+    object-fit:contain;
+    background:linear-gradient(135deg,#f8fafc,#eef2ff);
+    border-radius:16px;
+    padding:10px;
+}
+
+.product-name{
+    font-weight:900;
+    font-size:17px;
+    margin-bottom:7px;
+}
+
+.meta{
+    font-size:12px;
+    color:#64748b;
+    margin:4px 0;
+}
+
+.meta strong{
+    color:#334155;
+}
+
+.item-price{
+    margin-top:8px;
+    font-size:20px;
+    font-weight:950;
+}
+
+.qty-row{
+    margin-top:14px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.qty{
+    display:flex;
+    align-items:center;
+    border:1px solid #dbe3ed;
+    border-radius:11px;
+    overflow:hidden;
+    width:max-content;
+}
+
+.qty button{
+    width:34px;
+    height:34px;
+    border:none;
+    background:#f8fafc;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:900;
+}
+
+.qty span{
+    width:40px;
+    text-align:center;
+    font-size:13px;
+    font-weight:900;
+}
+
+.remove{
+    border:none;
+    background:#fff1f2;
+    color:#be123c;
+    border-radius:9px;
+    padding:8px 10px;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:900;
+}
+
+.item-total{
+    align-self:center;
+    text-align:right;
+    font-size:19px;
+    font-weight:950;
+}
+
+.summary{
+    padding:22px;
+    position:sticky;
+    top:90px;
+}
+
+.summary h2{
+    font-size:19px;
+    font-weight:950;
+    margin-bottom:19px;
+}
+
+.row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    margin:12px 0;
+    font-size:14px;
+    color:#64748b;
+}
+
+.row strong{
+    color:#172033;
+}
+
+.total-row{
+    border-top:1px dashed #cbd5e1;
+    margin-top:18px;
+    padding-top:17px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.total-label{
+    font-weight:900;
+}
+
+.total{
+    font-size:28px;
+    font-weight:950;
+}
+
+.checkout{
+    width:100%;
+    margin-top:20px;
+    border:none;
+    border-radius:14px;
+    padding:15px;
+    cursor:pointer;
+    background:linear-gradient(135deg,#111827,#312e81);
+    color:white;
+    font-size:15px;
+    font-weight:950;
+    box-shadow:0 12px 25px rgba(49,46,129,.2);
+    transition:.2s;
+}
+
+.checkout:hover{
+    transform:translateY(-2px);
+}
+
+.continue{
+    display:block;
+    text-align:center;
+    margin-top:13px;
+    padding:12px;
+    border:1px solid #e2e8f0;
+    color:#475569;
+    text-decoration:none;
+    border-radius:12px;
+    font-size:13px;
+    font-weight:850;
+}
+
+.trust{
+    margin-top:20px;
+    display:grid;
+    gap:9px;
+}
+
+.trust-item{
+    background:#f8fafc;
+    border:1px solid #e7edf5;
+    border-radius:12px;
+    padding:11px;
+    font-size:11px;
+    font-weight:800;
+    color:#475569;
+}
+
+.empty{
+    display:none;
+    text-align:center;
+    padding:75px 20px;
+}
+
+.empty-icon{
+    font-size:55px;
+    margin-bottom:13px;
+}
+
+.empty h2{
+    font-size:25px;
+    margin-bottom:8px;
+}
+
+.empty p{
+    color:#64748b;
+    margin-bottom:20px;
+}
+
+.shop-btn{
+    display:inline-block;
+    background:#111827;
+    color:#fff;
+    text-decoration:none;
+    border-radius:12px;
+    padding:12px 18px;
+    font-size:13px;
+    font-weight:900;
+}
+
+.address-box{
+    margin-top:20px;
+    padding:17px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:15px;
+}
+
+.address-box label{
+    display:block;
+    font-size:12px;
+    font-weight:900;
+    margin-bottom:8px;
+}
+
+.address-box textarea{
+    width:100%;
+    min-height:85px;
+    resize:vertical;
+    border:1px solid #dbe3ed;
+    border-radius:11px;
+    padding:11px;
+    outline:none;
+    font:inherit;
+    font-size:12px;
+}
+
+.address-box textarea:focus{
+    border-color:#6366f1;
+}
+
+@media(max-width:900px){
+
+    .layout{
+        grid-template-columns:1fr;
+    }
+
+    .summary{
+        position:static;
+    }
+
+}
+
+@media(max-width:620px){
+
+    .topbar{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .nav{
+        width:100%;
+        overflow:auto;
+    }
+
+    .cart-item{
+        grid-template-columns:85px minmax(0,1fr);
+    }
+
+    .product-image{
+        width:85px;
+        height:85px;
+    }
+
+    .item-total{
+        grid-column:2;
+        text-align:left;
+    }
+
+}
+
+</style>
+<style>
+#placeOrderBtn {
+    display: block !important;
+    width: 100% !important;
+    min-height: 56px !important;
+    margin: 20px auto !important;
+    padding: 16px 24px !important;
+    border: none !important;
+    border-radius: 14px !important;
+    background: linear-gradient(135deg, #111827, #3730a3) !important;
+    color: white !important;
+    font-size: 18px !important;
+    font-weight: 700 !important;
+    text-align: center !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    box-sizing: border-box !important;
+    transition: all 0.2s ease !important;
+}
+
+#placeOrderBtn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(55, 48, 163, 0.25);
+}
+
+#placeOrderBtn:active {
+    transform: translateY(0);
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+
+    <div class="brand">
+        Aura<span>Mart</span>
+    </div>
+
+    <nav class="nav">
+        <a href="products.jsp">Products</a>
+        <a href="orders.html">Orders</a>
+        <a href="login.html">Login</a>
+    </nav>
+
+</header>
+
+<main class="page">
+
+    <div class="heading">
+        <h1>My Shopping Cart</h1>
+        <p>Your selected products are waiting for you.</p>
+    </div>
+
+    <div class="layout">
+
+        <section class="cart-box">
+
+            <div class="cart-header">
+
+                <h2>Shopping Bag</h2>
+
+                <div class="cart-count" id="cartCount">
+                    0 Items
+                </div>
+
+            </div>
+
+            <div class="cart-list" id="cartList"></div>
+
+            <div class="empty" id="emptyCart">
+
+                <div class="empty-icon">??</div>
+
+                <h2>Your cart is empty</h2>
+
+                <p>
+                    Discover something you love from AuraMart.
+                </p>
+
+                <a class="shop-btn" href="products.jsp">
+                    Continue Shopping
+                </a>
+
+            </div>
+
+        </section>
+
+        <aside class="summary">
+
+            <h2>Order Summary</h2>
+
+            <div class="row">
+                <span>Subtotal</span>
+                <strong id="subtotal">?0</strong>
+            </div>
+
+            <div class="row">
+                <span>Delivery Charge</span>
+                <strong id="delivery">?50</strong>
+            </div>
+
+            <div class="row">
+                <span>Service Charge</span>
+                <strong id="service">?10</strong>
+            </div>
+
+            <div class="total-row">
+
+                <div class="total-label">
+                    Total
+                </div>
+
+                <div class="total" id="total">
+                    ?0
+                </div>
+
+            </div>
+
+            <div class="address-box">
+
+                <label for="address">
+                    Delivery Address
+                </label>
+
+                <textarea
+                    id="address"
+                    placeholder="Enter your complete delivery address..."
+                ></textarea>
+
+            </div>
+
+            <button type="button" id="placeOrderBtn" onclick="directPlaceOrder()" style="cursor:pointer; pointer-events:auto;">Place Order</button>
+
+            <a class="continue" href="products.jsp">
+                ? Continue Shopping
+            </a>
+
+            <div class="trust">
+
+                <div class="trust-item">
+                    ?? Secure Checkout
+                </div>
+
+                <div class="trust-item">
+                    ?? Fast & Reliable Delivery
+                </div>
+
+                <div class="trust-item">
+                    ?? Safe Payment Processing
+                </div>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</main>
+
+<script>
+
+const CART_KEY = "auraMartCart";
+
+const DELIVERY_CHARGE = 50;
+const SERVICE_CHARGE = 10;
+
+function getCart(){
+
+    try{
+
+        return JSON.parse(
+            localStorage.getItem(CART_KEY) || "[]"
+        );
+
+    }catch(error){
+
+        return [];
+
+    }
+
+}
+
+function saveCart(cart){
+
+    localStorage.setItem(
+        CART_KEY,
+        JSON.stringify(cart)
+    );
+
+}
+
+function money(value){
+
+    return "?" + Number(value || 0)
+        .toLocaleString("en-IN");
+
+}
+
+function renderCart(){
+
+    const cart = getCart();
+
+    const list =
+        document.getElementById("cartList");
+
+    const empty =
+        document.getElementById("emptyCart");
+
+    const count =
+        document.getElementById("cartCount");
+
+    const subtotalElement =
+        document.getElementById("subtotal");
+
+    const totalElement =
+        document.getElementById("total");
+
+    count.textContent =
+        cart.length +
+        (cart.length === 1 ? " Item" : " Items");
+
+    if(!cart.length){
+
+        list.innerHTML = "";
+
+        empty.style.display = "block";
+
+        subtotalElement.textContent = money(0);
+
+        totalElement.textContent = money(0);
+
+        return;
+
+    }
+
+    empty.style.display = "none";
+
+    let subtotal = 0;
+
+    list.innerHTML = cart.map(function(item,index){
+
+        const quantity =
+            Number(item.quantity || 1);
+
+        const price =
+            Number(item.price || 0);
+
+        const itemTotal =
+            price * quantity;
+
+        subtotal += itemTotal;
+
+        const image =
+            item.image ||
+            "https://dummyimage.com/500x500/f3f4f6/111827&text=AuraMart";
+
+        return `
+
+        <div class="cart-item">
+
+            <img
+                class="product-image"
+                src="${escapeHtml(image)}"
+                alt="${escapeHtml(item.name || "Product")}"
+                onerror="this.onerror=null;this.src='https://dummyimage.com/500x500/f3f4f6/111827&text=AuraMart';"
+            >
+
+            <div>
+
+                <div class="product-name">
+                    ${escapeHtml(item.name || "AuraMart Product")}
+                </div>
+
+                <div class="meta">
+                    Category:
+                    <strong>
+                        ${escapeHtml(item.category || "Product")}
+                    </strong>
+                </div>
+
+                <div class="meta">
+                    Colour:
+                    <strong>
+                        ${escapeHtml(item.colour || "Default")}
+                    </strong>
+                </div>
+
+                <div class="item-price">
+                    ${money(price)}
+                </div>
+
+                <div class="qty-row">
+
+                    <div class="qty">
+
+                        <button onclick="changeQuantity(${index},-1)">
+                            -
+                        </button>
+
+                        <span>
+                            ${quantity}
+                        </span>
+
+                        <button onclick="changeQuantity(${index},1)">
+                            +
+                        </button>
+
+                    </div>
+
+                    <button
+                        class="remove"
+                        onclick="removeItem(${index})"
+                    >
+                        Remove
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="item-total">
+                ${money(itemTotal)}
+            </div>
+
+        </div>
+
+        `;
+
+    }).join("");
+
+    const grandTotal =
+        subtotal +
+        DELIVERY_CHARGE +
+        SERVICE_CHARGE;
+
+    subtotalElement.textContent =
+        money(subtotal);
+
+    document.getElementById("delivery").textContent =
+        money(DELIVERY_CHARGE);
+
+    document.getElementById("service").textContent =
+        money(SERVICE_CHARGE);
+
+    totalElement.textContent =
+        money(grandTotal);
+
+}
+
+function changeQuantity(index,change){
+
+    const cart = getCart();
+
+    if(!cart[index]) return;
+
+    let quantity =
+        Number(cart[index].quantity || 1);
+
+    quantity += change;
+
+    if(quantity < 1){
+        quantity = 1;
+    }
+
+    cart[index].quantity = quantity;
+
+    saveCart(cart);
+
+    renderCart();
+
+}
+
+function removeItem(index){
+
+    const cart = getCart();
+
+    if(!cart[index]) return;
+
+    cart.splice(index,1);
+
+    saveCart(cart);
+
+    renderCart();
+
+}
+
+
+async function placeOrder(){
+
+    const cart = getCart();
+
+    if(cart.length === 0){
+        alert("Your cart is empty!");
+        return;
+    }
+
+    const address =
+        document.getElementById("deliveryAddress").value.trim();
+
+    
+
+    let subtotal = 0;
+
+    cart.forEach(item => {
+
+        const price =
+            Number(item.price) || 0;
+
+        const quantity =
+            Number(item.quantity) || 1;
+
+        subtotal += price * quantity;
+    });
+
+    const deliveryCharge = 50;
+    const serviceCharge = 10;
+
+    const totalAmount =
+        subtotal +
+        deliveryCharge +
+        serviceCharge;
+
+    /*
+     * Store checkout information temporarily.
+     * Order will be created only after payment.
+     */
+
+    localStorage.setItem(
+        "auraMartPaymentTotal",
+        totalAmount
+    );
+
+    localStorage.setItem(
+        "auraMartCheckoutAddress",
+        address
+    );
+
+    localStorage.setItem(
+        "auraMartCheckoutCart",
+        JSON.stringify(cart)
+    );
+
+    console.log(
+        "Checkout ready. Redirecting to AuraMart Payment..."
+    );
+
+    window.location.href = "payment.html";
+}
+function addField(form, name, value){
+
+    const input = document.createElement("input");
+
+    input.type = "hidden";
+    input.name = name;
+    input.value = value;
+
+    form.appendChild(input);
+}
+
+function escapeHtml(value){
+
+    return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#39;");
+
+}
+
+
+
+renderCart();
+
+</script>
+
+<script>
+window.placeOrder = function () {
+
+    console.log("AURAMART: Place Order clicked");
+
+    const cart = JSON.parse(
+        localStorage.getItem("auraMartCart") || "[]"
+    );
+
+    if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+    }
+
+    const addressBox = document.getElementById("deliveryAddress");
+
+    // Accept ANY address text
+    const address = addressBox ? addressBox.value.trim() : "";
+
+    if (address.length === 0) {
+        alert("Please enter your delivery address.");
+        if (addressBox) addressBox.focus();
+        return;
+    }
+
+    let subtotal = 0;
+
+    cart.forEach(function(item) {
+        subtotal += Number(item.price || 0) *
+                    Number(item.quantity || 1);
+    });
+
+    const deliveryCharge = 50;
+    const serviceCharge = 10;
+    const totalAmount =
+        subtotal + deliveryCharge + serviceCharge;
+
+    localStorage.setItem(
+        "auraMartCheckoutCart",
+        JSON.stringify(cart)
+    );
+
+    localStorage.setItem(
+        "auraMartCheckoutAddress",
+        address
+    );
+
+    localStorage.setItem(
+        "auraMartPaymentTotal",
+        String(totalAmount)
+    );
+
+    localStorage.setItem(
+        "auraMartCheckoutSubtotal",
+        String(subtotal)
+    );
+
+    localStorage.setItem(
+        "auraMartCheckoutDelivery",
+        String(deliveryCharge)
+    );
+
+    localStorage.setItem(
+        "auraMartCheckoutService",
+        String(serviceCharge)
+    );
+
+    console.log("AURAMART: Address accepted:", address);
+    console.log("AURAMART: Going to payment page");
+
+    window.location.href = "payment.html";
+};</script>
+<script>
+function directPlaceOrder() {
+    try {
+        var cart = JSON.parse(localStorage.getItem("auraMartCart") || "[]");
+
+        if (!cart.length) {
+            alert("Your cart is empty.");
+            return;
+        }
+
+        var addressBox = document.getElementById("deliveryAddress");
+        var address = addressBox ? addressBox.value : "";
+
+        // Any non-empty text is accepted as address
+        if (address.trim() === "") {
+            address = "Default Delivery Address";
+        }
+
+        var subtotal = 0;
+
+        for (var i = 0; i < cart.length; i++) {
+            subtotal += Number(cart[i].price || 0) *
+                        Number(cart[i].quantity || 1);
+        }
+
+        var delivery = 50;
+        var service = 10;
+        var total = subtotal + delivery + service;
+
+        localStorage.setItem("auraMartCheckoutCart", JSON.stringify(cart));
+        localStorage.setItem("auraMartCheckoutAddress", address);
+        localStorage.setItem("auraMartPaymentTotal", String(total));
+        localStorage.setItem("auraMartCheckoutSubtotal", String(subtotal));
+        localStorage.setItem("auraMartCheckoutDelivery", String(delivery));
+        localStorage.setItem("auraMartCheckoutService", String(service));
+
+        console.log("AURAMART: PLACE ORDER CLICKED");
+        console.log("AURAMART: Address =", address);
+        console.log("AURAMART: Total =", total);
+
+        window.location.href = "payment.html";
+
+    } catch (e) {
+        console.error("Place Order Error:", e);
+        alert("Unable to continue. Please refresh and try again.");
+    }
+}
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

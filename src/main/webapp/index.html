@@ -1,0 +1,588 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AuraMart | Online Shopping</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f7f9fc;
+            color: #172033;
+            min-height: 100vh;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.97);
+            border-bottom: 1px solid #e8ebf2;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            height: 76px;
+            padding: 0 28px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            text-decoration: none;
+            color: #172033;
+            font-size: 27px;
+            font-weight: 800;
+            letter-spacing: -0.8px;
+        }
+
+        .logo span {
+            color: #6c4df6;
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .login-btn,
+        .register-btn {
+            text-decoration: none;
+            padding: 11px 22px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.25s ease;
+        }
+
+        .login-btn {
+            color: #4f46e5;
+            background: #f3f1ff;
+        }
+
+        .login-btn:hover {
+            background: #e8e4ff;
+            transform: translateY(-1px);
+        }
+
+        .register-btn {
+            color: white;
+            background: linear-gradient(135deg, #6c4df6, #4f46e5);
+            box-shadow: 0 7px 18px rgba(79, 70, 229, 0.22);
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 24px rgba(79, 70, 229, 0.30);
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 28px 70px;
+
+            display: grid;
+            grid-template-columns: 1.1fr 0.9fr;
+            align-items: center;
+            gap: 60px;
+        }
+
+        .hero-content {
+            max-width: 650px;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+
+            padding: 8px 14px;
+            margin-bottom: 22px;
+
+            background: #eeecff;
+            color: #5b45dc;
+            border-radius: 30px;
+
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .badge::before {
+            content: "●";
+            font-size: 9px;
+        }
+
+        .hero h1 {
+            font-size: clamp(44px, 6vw, 72px);
+            line-height: 1.04;
+            letter-spacing: -2.5px;
+            margin-bottom: 24px;
+            color: #121827;
+        }
+
+        .hero h1 span {
+            color: #6248ed;
+        }
+
+        .hero p {
+            max-width: 570px;
+            color: #667085;
+            font-size: 18px;
+            line-height: 1.7;
+            margin-bottom: 34px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+
+        .primary-btn,
+        .secondary-btn {
+            text-decoration: none;
+            padding: 14px 25px;
+            border-radius: 11px;
+            font-size: 15px;
+            font-weight: 700;
+            transition: 0.25s ease;
+        }
+
+        .primary-btn {
+            color: white;
+            background: linear-gradient(135deg, #6c4df6, #4f46e5);
+            box-shadow: 0 10px 25px rgba(79, 70, 229, 0.22);
+        }
+
+        .primary-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 14px 30px rgba(79, 70, 229, 0.30);
+        }
+
+        .secondary-btn {
+            color: #344054;
+            background: white;
+            border: 1px solid #dfe3eb;
+        }
+
+        .secondary-btn:hover {
+            border-color: #bdb5ff;
+            color: #5842dc;
+            transform: translateY(-2px);
+        }
+
+        /* ================= VISUAL CARD ================= */
+
+        .hero-visual {
+            position: relative;
+            min-height: 390px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .visual-card {
+            width: 340px;
+            height: 360px;
+
+            border-radius: 30px;
+
+            background:
+                radial-gradient(circle at 25% 20%, rgba(255,255,255,0.9), transparent 30%),
+                linear-gradient(145deg, #eeeaff, #ddd7ff);
+
+            box-shadow: 0 25px 60px rgba(52, 43, 130, 0.15);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .visual-card::before {
+            content: "";
+            position: absolute;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.38);
+            top: -70px;
+            right: -60px;
+        }
+
+        .shopping-icon {
+            width: 170px;
+            height: 170px;
+            border-radius: 38px;
+
+            background: white;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 82px;
+
+            box-shadow: 0 20px 40px rgba(61, 48, 150, 0.16);
+
+            transform: rotate(-5deg);
+        }
+
+        .floating-card {
+            position: absolute;
+            background: white;
+            padding: 15px 18px;
+            border-radius: 14px;
+            box-shadow: 0 15px 35px rgba(16, 24, 40, 0.12);
+            font-size: 13px;
+            font-weight: 700;
+            color: #344054;
+        }
+
+        .floating-one {
+            left: 5px;
+            top: 65px;
+        }
+
+        .floating-two {
+            right: 0;
+            bottom: 55px;
+        }
+
+        /* ================= FEATURES ================= */
+
+        .features {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px 28px 80px;
+
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .feature {
+            background: white;
+            border: 1px solid #e9ecf2;
+            border-radius: 18px;
+            padding: 25px;
+
+            transition: 0.25s ease;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(16, 24, 40, 0.08);
+        }
+
+        .feature-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 13px;
+
+            background: #f0edff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 23px;
+            margin-bottom: 17px;
+        }
+
+        .feature h3 {
+            font-size: 17px;
+            margin-bottom: 8px;
+            color: #182230;
+        }
+
+        .feature p {
+            color: #667085;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            border-top: 1px solid #e8ebf2;
+            background: white;
+            padding: 25px;
+            text-align: center;
+            color: #98a2b3;
+            font-size: 13px;
+        }
+
+        footer strong {
+            color: #667085;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 850px) {
+
+            .navbar {
+                height: 70px;
+                padding: 0 18px;
+            }
+
+            .logo {
+                font-size: 23px;
+            }
+
+            .login-btn,
+            .register-btn {
+                padding: 9px 14px;
+                font-size: 13px;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                text-align: center;
+                padding: 65px 20px 45px;
+                gap: 40px;
+            }
+
+            .hero-content {
+                margin: auto;
+            }
+
+            .hero p {
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            .hero-buttons {
+                justify-content: center;
+            }
+
+            .hero-visual {
+                min-height: 330px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+                padding: 10px 20px 55px;
+            }
+        }
+
+        @media (max-width: 480px) {
+
+            .nav-actions {
+                gap: 7px;
+            }
+
+            .login-btn,
+            .register-btn {
+                padding: 8px 11px;
+            }
+
+            .hero h1 {
+                font-size: 43px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+
+            .visual-card {
+                width: 285px;
+                height: 310px;
+            }
+
+            .shopping-icon {
+                width: 135px;
+                height: 135px;
+                font-size: 65px;
+            }
+
+            .floating-one {
+                left: 0;
+            }
+
+            .floating-two {
+                right: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+
+    <header>
+        <nav class="navbar">
+
+            <a href="index.html" class="logo">
+                Aura<span>Mart</span>
+            </a>
+
+            <div class="nav-actions">
+                <a href="login.html" class="login-btn">
+                    Login
+                </a>
+
+                <a href="register.html" class="register-btn">
+                    Create Account
+                </a>
+            </div>
+
+        </nav>
+    </header>
+
+
+    <!-- ================= HERO ================= -->
+
+    <main>
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="badge">
+                    Welcome to AuraMart
+                </div>
+
+                <h1>
+                    Shop smarter.<br>
+                    Live <span>better.</span>
+                </h1>
+
+                <p>
+                    Discover quality products, enjoy a simple shopping
+                    experience, and manage your orders effortlessly with
+                    AuraMart.
+                </p>
+
+                <div class="hero-buttons">
+
+                    <a href="register.html" class="primary-btn">
+                        Create Your Account →
+                    </a>
+
+                    <a href="login.html" class="secondary-btn">
+                        Customer Login
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- ================= VISUAL ================= -->
+
+            <div class="hero-visual">
+
+                <div class="floating-card floating-one">
+                    ✨ Easy Shopping
+                </div>
+
+                <div class="visual-card">
+
+                    <div class="shopping-icon">
+                        🛍️
+                    </div>
+
+                </div>
+
+                <div class="floating-card floating-two">
+                    ✓ Simple & Secure
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= FEATURES ================= -->
+
+        <section class="features">
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    👤
+                </div>
+
+                <h3>
+                    Easy Account
+                </h3>
+
+                <p>
+                    Create your AuraMart account quickly and start
+                    shopping with ease.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    🛒
+                </div>
+
+                <h3>
+                    Simple Shopping
+                </h3>
+
+                <p>
+                    Browse products, add your favourites to the cart,
+                    and place orders effortlessly.
+                </p>
+
+            </div>
+
+
+            <div class="feature">
+
+                <div class="feature-icon">
+                    📦
+                </div>
+
+                <h3>
+                    Easy Orders
+                </h3>
+
+                <p>
+                    Keep your shopping experience organized with
+                    convenient order management.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+        © 2026 <strong>AuraMart</strong>. All rights reserved.
+    </footer>
+
+</body>
+</html>
+
