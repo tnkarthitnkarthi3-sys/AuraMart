@@ -4,29 +4,29 @@ A full-stack Java-based e-commerce web application built using Java, Maven, Apac
 
 ## 🚀 Features
 
-- 👤 User Registration & Login
-- 🛍️ Product Listing
-- 🔎 Product Browsing
-- 🛒 Add to Cart
-- ➕ Update Cart Quantity
-- 💰 Order Price Calculation
-- 📦 Place Order
-- ✅ Order Confirmation
-- ⭐ Customer Reviews
-- 👨‍💼 Admin Product Management
-- 📋 Admin Order Management
-- 🗄️ MySQL Database Integration
+* 👤 User Registration \& Login
+* 🛍️ Product Listing
+* 🔎 Product Browsing
+* 🛒 Add to Cart
+* ➕ Update Cart Quantity
+* 💰 Order Price Calculation
+* 📦 Place Order
+* ✅ Order Confirmation
+* ⭐ Customer Reviews
+* 👨‍💼 Admin Product Management
+* 📋 Admin Order Management
+* 🗄️ MySQL Database Integration
 
 ## 🛠️ Technologies Used
 
-- Java 17
-- Maven
-- Apache Tomcat
-- MySQL 8.0
-- HTML5
-- CSS3
-- JavaScript
-- JSP / Servlets
+* Java 17
+* Maven
+* Apache Tomcat
+* MySQL 8.0
+* HTML5
+* CSS3
+* JavaScript
+* JSP / Servlets
 
 ## 🏗️ Project Architecture
 
@@ -42,19 +42,19 @@ MySQL Database
 
 ## 📂 Main Modules
 
-- User Authentication
-- Product Management
-- Shopping Cart
-- Order Management
-- Admin Dashboard
-- Customer Reviews
+* User Authentication
+* Product Management
+* Shopping Cart
+* Order Management
+* Admin Dashboard
+* Customer Reviews
 
 ## ⚙️ Requirements
 
-- Java JDK 17
-- Apache Maven
-- Apache Tomcat 11
-- MySQL 8.0
+* Java JDK 17
+* Apache Maven
+* Apache Tomcat 11
+* MySQL 8.0
 
 ## ▶️ How to Run
 
@@ -73,3 +73,4 @@ AuraMart is designed as a complete online shopping platform demonstrating Java w
 ## 👨‍💻 Developer
 
 AuraMart — Java Web Application Project
+
