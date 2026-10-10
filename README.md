@@ -74,3 +74,18 @@ AuraMart is designed as a complete online shopping platform demonstrating Java w
 
 AuraMart — Java Web Application Project
 
+
+## Running Unit Tests
+
+Run the automated unit tests using Maven:
+```bash
+mvn clean test
+```
+
+## Building the Application
+
+Build the AuraMart WAR package using:
+```bash
+mvn clean package
+```
+
