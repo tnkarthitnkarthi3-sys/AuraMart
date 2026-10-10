@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -195,7 +195,7 @@ h1{
 <body>
 
 <header>
-    <div class="logo">ðŸ›ï¸ AuraMart</div>
+    <div class="logo">?Y????? AuraMart</div>
 
     <nav>
         <a href="index.html">Home</a>
@@ -208,7 +208,7 @@ h1{
 
 <div class="container">
 
-<h1>ðŸ›’ Your Cart</h1>
+<h1>?Y?????T Your Cart</h1>
 
 <div id="cartItems"></div>
 
@@ -216,27 +216,27 @@ h1{
 
     <div class="summary-row">
         <span>Subtotal</span>
-        <strong>â‚¹<span id="subtotal">0</span></strong>
+        <strong>???s?<span id="subtotal">0</span></strong>
     </div>
 
     <div class="summary-row">
         <span>Delivery Charge</span>
-        <strong>â‚¹<span id="delivery">50</span></strong>
+        <strong>???s?<span id="delivery">50</span></strong>
     </div>
 
     <div class="summary-row">
         <span>Service Charge</span>
-        <strong>â‚¹<span id="service">10</span></strong>
+        <strong>???s?<span id="service">10</span></strong>
     </div>
 
     <div class="summary-row grand-total">
         <span>Total</span>
-        <span>â‚¹<span id="total">0</span></span>
+        <span>???s?<span id="total">0</span></span>
     </div>
 
     <div class="address-box">
         <label for="deliveryAddress">
-            ðŸ“ Delivery Address
+            ?Y??o? Delivery Address
         </label>
 
         <textarea
@@ -249,7 +249,7 @@ h1{
         class="order-btn"
         onclick="placeOrder()">
 
-        âœ… Place Order
+        ??"??? Place Order
 
     </button>
 
@@ -303,7 +303,7 @@ function displayCart(){
 
         container.innerHTML = `
             <div class="empty">
-                <h2>Your cart is empty ðŸ›’</h2>
+                <h2>Your cart is empty ?Y?????T</h2>
                 <p>Add some products first.</p>
 
                 <a
@@ -345,7 +345,7 @@ function displayCart(){
                 <h3>${item.name || "Product"}</h3>
 
                 <div class="item-price">
-                    â‚¹${money(price)}
+                    ???s?${money(price)}
                 </div>
 
             </div>
@@ -354,7 +354,7 @@ function displayCart(){
 
                 <button
                     onclick="decreaseQuantity(${index})">
-                    âˆ’
+                    ?????T
                 </button>
 
                 <strong>${quantity}</strong>
@@ -375,7 +375,7 @@ function displayCart(){
             </div>
 
             <strong>
-                â‚¹${money(itemTotal)}
+                ???s?${money(itemTotal)}
             </strong>
 
         </div>
@@ -598,6 +598,9 @@ document.addEventListener(
 
 </body>
 </html>
+
+
+
 
 
 

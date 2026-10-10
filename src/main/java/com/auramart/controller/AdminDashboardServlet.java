@@ -1,7 +1,6 @@
 package com.auramart.controller;
 
 import com.auramart.dao.AdminDAO;
-import com.auramart.model.Product;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -10,7 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.util.List;
 
 @WebServlet("/admin-dashboard-data")
 public class AdminDashboardServlet extends HttpServlet {
@@ -28,32 +26,15 @@ public class AdminDashboardServlet extends HttpServlet {
 
         try {
 
-            int totalProducts =
-                    adminDAO.getTotalProducts();
-
-            int totalOrders =
-                    adminDAO.getTotalOrders();
-
-            int inStock =
-                    adminDAO.getInStockProducts();
-
-            int outOfStock =
-                    adminDAO.getOutOfStockProducts();
-
-            int totalUsers =
-                    adminDAO.getTotalUsers();
-
-            int pendingOrders =
-                    adminDAO.getPendingOrders();
+            int totalUsers = adminDAO.getTotalUsers();
+            int totalSellers = adminDAO.getTotalSellers();
+            int totalOrders = adminDAO.getTotalOrders();
 
             String json =
                     "{"
-                    + "\"totalProducts\":" + totalProducts + ","
                     + "\"totalUsers\":" + totalUsers + ","
-                    + "\"totalOrders\":" + totalOrders + ","
-                    + "\"pendingOrders\":" + pendingOrders + ","
-                    + "\"inStock\":" + inStock + ","
-                    + "\"outOfStock\":" + outOfStock
+                    + "\"totalSellers\":" + totalSellers + ","
+                    + "\"totalOrders\":" + totalOrders
                     + "}";
 
             response.getWriter().print(json);

@@ -1,4 +1,5 @@
-﻿<%@ page import="com.auramart.dao.ProductDAO" %>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="com.auramart.dao.ProductDAO" %>
 <%@ page import="com.auramart.model.Product" %>
 
 <%
@@ -1140,4 +1141,7 @@ function showToast(message){
 
 </body>
 </html>
+
+
+
 

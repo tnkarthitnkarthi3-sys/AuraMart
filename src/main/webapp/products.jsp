@@ -1,4 +1,5 @@
-﻿<%@ page import="java.util.*" %>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page import="java.util.*" %>
 <%@ page import="java.lang.reflect.*" %>
 <%@ page import="com.auramart.dao.ProductDAO" %>
 
@@ -69,8 +70,14 @@
             return "https://dummyimage.com/700x700/f3f4f6/111827&text=Product+" + id;
         }
 
-        if (value.startsWith("http://") || value.startsWith("https://") || value.startsWith("/")) {
+        if (value.startsWith("http://") || value.startsWith("https://")) {
             return value;
+        }
+
+        // DB values like /images/watch1.jpg
+        // Convert to context-relative path: images/watch1.jpg
+        if (value.startsWith("/")) {
+            value = value.substring(1);
         }
 
         if (value.startsWith("images/")) {
@@ -79,7 +86,6 @@
 
         return "images/" + value;
     }
-
     private List<?> loadProducts() {
         try {
             ProductDAO dao = new ProductDAO();
@@ -561,7 +567,27 @@
                 height:280px;
             }
         }
-    </style>
+    
+/* FORCE PRODUCT ACTION BUTTONS CLICKABLE */
+.product-card .actions{
+    position:relative !important;
+    z-index:99999 !important;
+    pointer-events:auto !important;
+}
+
+.product-card .actions .btn{
+    position:relative !important;
+    z-index:100000 !important;
+    pointer-events:auto !important;
+    cursor:pointer !important;
+}
+
+.product-card .actions button{
+    pointer-events:auto !important;
+    cursor:pointer !important;
+}
+
+</style>
 </head>
 
 <body>
@@ -597,14 +623,14 @@
                 autocomplete="off"
                 placeholder="Try: enakku 50k kulla best laptop venum"
             >
-            <div class="search-icon">🔎</div>
+            <div class="search-icon">AI Search</div>
         </div>
 
         <div class="ai-hint">
             Try:
-            <b>50k kulla best laptop venum</b> ·
-            <b>20k kulla mobile kudu</b> ·
-            <b>cheap beauty products</b> ·
+            <b>50k kulla best laptop venum</b>
+            <b>20k kulla mobile kudu</b>
+            <b>cheap beauty products</b>
             <b>gaming laptop under 60000</b>
         </div>
 
@@ -707,14 +733,12 @@
                 </div>
 
                 <div class="rating">
-                    ⭐ <%= rating > 0 ? String.format("%.1f", rating) : "New" %>
+                    ★ New
                 </div>
 
                 <div class="price-row">
 
-                    <div class="price">
-                        ₹<%= String.format("%,.0f", price) %>
-                    </div>
+                    <div class="price">&#8377;<%= String.format("%,.0f", price) %></div>
 
                     <div class="stock-text">
                         <%= stock > 0 ? stock + " available" : "Currently unavailable" %>
@@ -727,7 +751,6 @@
                     <button
                         class="btn btn-cart"
                         onclick="addToCart(this)"
-                        <%= stock <= 0 ? "disabled" : "" %>
                     >
                         🛒 Add
                     </button>
@@ -735,7 +758,6 @@
                     <button
                         class="btn btn-buy"
                         onclick="buyNow(this)"
-                        <%= stock <= 0 ? "disabled" : "" %>
                     >
                         Buy Now
                     </button>
@@ -756,9 +778,9 @@
 
         <p>
             Try something like:
-            “50k kulla best laptop”
+            <div class="ai-suggestion">50k kulla best laptop</div>
             or
-            “20k kulla mobile”.
+            <div class="ai-suggestion">20k kulla mobile</div>
         </p>
 
     </div>
@@ -849,8 +871,8 @@
         const s = normalize(text);
 
         let match = s.match(
-            /(?:under|below|less than|upto|up to|maximum|max)\s*(?:₹|rs|inr)?\s*([\d.]+)\s*(k|thousand)?/i
-        );
+    /(?:under|below|less than|upto|up to|maximum|max)\s*(?:₹|rs|inr)?\s*([\d.]+)\s*(k|thousand)?/i
+);
 
         if(!match){
 
@@ -1097,7 +1119,7 @@
         }
 
         if(budget){
-            text += " under ₹" +
+            text += " under " +
                 budget.toLocaleString("en-IN");
         }
 
@@ -1366,7 +1388,7 @@
 
         const original = button.innerHTML;
 
-        button.innerHTML = "✓ Added";
+        button.innerHTML = "🛒 Added";
 
         setTimeout(function(){
 
@@ -1406,3 +1428,15 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

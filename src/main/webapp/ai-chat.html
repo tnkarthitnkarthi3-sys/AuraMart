@@ -1,0 +1,68 @@
+﻿<div id="auraAIButton" onclick="toggleAuraAI()">
+    🤖
+</div>
+
+<div id="auraAIBox">
+
+    <div class="aura-ai-header">
+
+        <div>
+            <strong>🤖 AuraMart AI</strong>
+            <small>Shopping Assistant</small>
+        </div>
+
+        <button onclick="toggleAuraAI()">×</button>
+
+    </div>
+
+    <div id="auraAIMessages">
+
+        <div class="aura-ai-message bot">
+            Hi macha 👋<br>
+            I'm AuraMart AI Assistant.<br><br>
+            Product, price, stock, cart or order pathi
+            kekkalaam!
+        </div>
+
+    </div>
+
+    <div class="aura-ai-quick">
+
+        <button onclick="auraQuick('Show me available products')">
+            🛍️ Products
+        </button>
+
+        <button onclick="auraQuick('What products are available?')">
+            🔎 Search
+        </button>
+
+        <button onclick="auraQuick('How can I check my orders?')">
+            📦 Orders
+        </button>
+
+    </div>
+
+    <div class="aura-ai-input">
+
+        <input
+            id="auraAIInput"
+            type="text"
+            placeholder="Ask AuraMart AI..."
+            autocomplete="off"
+            onkeydown="if(event.key==='Enter') sendAuraAI()"
+        >
+
+        <button onclick="sendAuraAI()">
+            ➤
+        </button>
+
+    </div>
+
+</div>
+
+<link
+    rel="stylesheet"
+    href="ai-chat.css"
+>
+
+<script src="ai-chat.js"></script>

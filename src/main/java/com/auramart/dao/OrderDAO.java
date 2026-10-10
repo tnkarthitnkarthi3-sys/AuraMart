@@ -449,4 +449,144 @@ public class OrderDAO {
         }
     }
 
+
+    // ==========================================
+    // SELLER ORDERS
+    // ==========================================
+
+    public List<com.auramart.model.SellerOrder> getOrdersBySellerId(int sellerId)
+            throws SQLException {
+
+        List<com.auramart.model.SellerOrder> orders =
+                new ArrayList<>();
+
+        String sql =
+                "SELECT " +
+                "o.id AS order_id, " +
+                "o.user_id AS buyer_id, " +
+                "u.name AS buyer_name, " +
+                "u.email AS buyer_email, " +
+                "oi.product_id, " +
+                "p.name AS product_name, " +
+                "oi.quantity, " +
+                "oi.price, " +
+                "o.total_amount, " +
+                "o.delivery_address, " +
+                "o.status, " +
+                "o.created_at " +
+                "FROM orders o " +
+                "INNER JOIN order_items oi ON o.id = oi.order_id " +
+                "INNER JOIN products p ON oi.product_id = p.id " +
+                "INNER JOIN users u ON o.user_id = u.id " +
+                "WHERE p.seller_id = ? " +
+                "ORDER BY o.created_at DESC, o.id DESC";
+
+        try (
+                Connection conn = DBConnection.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, sellerId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+
+                    com.auramart.model.SellerOrder order =
+                            new com.auramart.model.SellerOrder();
+
+                    order.setOrderId(
+                            rs.getInt("order_id")
+                    );
+
+                    order.setBuyerId(
+                            rs.getInt("buyer_id")
+                    );
+
+                    order.setBuyerName(
+                            rs.getString("buyer_name")
+                    );
+
+                    order.setBuyerEmail(
+                            rs.getString("buyer_email")
+                    );
+
+                    order.setProductId(
+                            rs.getInt("product_id")
+                    );
+
+                    order.setProductName(
+                            rs.getString("product_name")
+                    );
+
+                    order.setQuantity(
+                            rs.getInt("quantity")
+                    );
+
+                    order.setPrice(
+                            rs.getBigDecimal("price")
+                    );
+
+                    order.setOrderTotal(
+                            rs.getBigDecimal("total_amount")
+                    );
+
+                    order.setDeliveryAddress(
+                            rs.getString("delivery_address")
+                    );
+
+                    order.setStatus(
+                            rs.getString("status")
+                    );
+
+                    order.setCreatedAt(
+                            rs.getTimestamp("created_at")
+                    );
+
+                    orders.add(order);
+                }
+            }
+        }
+
+        return orders;
+    }
+
+    // ==========================================
+    // SELLER ORDER STATUS UPDATE
+    // ==========================================
+
+    public boolean updateSellerOrderStatus(
+            int sellerId,
+            int orderId,
+            String status)
+            throws SQLException {
+
+        String sql =
+                "UPDATE orders o " +
+                "SET o.status = ? " +
+                "WHERE o.id = ? " +
+                "AND EXISTS (" +
+                "    SELECT 1 " +
+                "    FROM order_items oi " +
+                "    INNER JOIN products p " +
+                "        ON oi.product_id = p.id " +
+                "    WHERE oi.order_id = o.id " +
+                "    AND p.seller_id = ?" +
+                ")";
+
+        try (
+                Connection conn =
+                        DBConnection.getConnection();
+
+                PreparedStatement ps =
+                        conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, status);
+            ps.setInt(2, orderId);
+            ps.setInt(3, sellerId);
+
+            return ps.executeUpdate() > 0;
+        }
+    }
 }

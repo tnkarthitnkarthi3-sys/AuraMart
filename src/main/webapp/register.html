@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -11,147 +11,338 @@
     box-sizing:border-box;
     margin:0;
     padding:0;
-    font-family:Arial,Helvetica,sans-serif;
 }
 
 body{
     min-height:100vh;
-    background:linear-gradient(135deg,#eef2ff,#f8fafc);
+    font-family:Inter,Arial,sans-serif;
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:30px;
+    padding:30px 15px;
+    overflow:auto;
+    color:#fff;
+    background:
+        radial-gradient(circle at 15% 15%,rgba(124,58,237,.30),transparent 30%),
+        radial-gradient(circle at 85% 85%,rgba(37,99,235,.28),transparent 32%),
+        linear-gradient(135deg,#030712,#0b1024 48%,#111936);
+    position:relative;
+}
+
+body:before{
+    content:"";
+    position:fixed;
+    inset:-100px;
+    background:
+        repeating-linear-gradient(
+            110deg,
+            rgba(255,255,255,.035) 0px,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px,
+            transparent 7px
+        ),
+        repeating-linear-gradient(
+            20deg,
+            rgba(255,255,255,.025) 0px,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 9px
+        );
+    opacity:.7;
+    transform:rotate(-3deg) scale(1.2);
+    pointer-events:none;
+}
+
+.orb{
+    position:fixed;
+    border-radius:50%;
+    pointer-events:none;
+    filter:blur(8px);
+}
+
+.orb.one{
+    width:300px;
+    height:300px;
+    background:rgba(124,58,237,.18);
+    top:-100px;
+    left:-80px;
+    animation:floatOne 9s ease-in-out infinite;
+}
+
+.orb.two{
+    width:350px;
+    height:350px;
+    background:rgba(59,130,246,.16);
+    bottom:-140px;
+    right:-100px;
+    animation:floatTwo 10s ease-in-out infinite;
+}
+
+@keyframes floatOne{
+    0%,100%{
+        transform:translate(0,0);
+    }
+    50%{
+        transform:translate(70px,50px);
+    }
+}
+
+@keyframes floatTwo{
+    0%,100%{
+        transform:translate(0,0);
+    }
+    50%{
+        transform:translate(-60px,-40px);
+    }
 }
 
 .container{
-    width:100%;
-    max-width:900px;
+    position:relative;
+    z-index:5;
+    width:min(900px,96vw);
     display:grid;
-    grid-template-columns:1fr 1fr;
-    background:white;
-    border-radius:24px;
+    grid-template-columns:.85fr 1.15fr;
+    border-radius:32px;
     overflow:hidden;
-    box-shadow:0 20px 60px rgba(15,23,42,.15);
+    background:rgba(255,255,255,.075);
+    border:1px solid rgba(255,255,255,.15);
+    backdrop-filter:blur(28px);
+    -webkit-backdrop-filter:blur(28px);
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.50),
+        inset 0 1px 0 rgba(255,255,255,.12);
+    animation:cardEnter .8s cubic-bezier(.2,.8,.2,1);
+}
+
+@keyframes cardEnter{
+    from{
+        opacity:0;
+        transform:translateY(35px) scale(.96);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0) scale(1);
+    }
 }
 
 .left{
-    background:linear-gradient(135deg,#4f46e5,#7c3aed);
-    color:white;
-    padding:55px 40px;
+    padding:55px 42px;
     display:flex;
     flex-direction:column;
     justify-content:center;
+    background:
+        linear-gradient(
+            145deg,
+            rgba(124,58,237,.48),
+            rgba(37,99,235,.20)
+        );
+    border-right:1px solid rgba(255,255,255,.10);
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:14px;
+    margin-bottom:27px;
+}
+
+.brand-icon{
+    width:55px;
+    height:55px;
+    border-radius:18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:800;
+    background:linear-gradient(135deg,#8b5cf6,#2563eb);
+    box-shadow:0 12px 30px rgba(99,102,241,.30);
+    animation:brandFloat 4s ease-in-out infinite;
+}
+
+@keyframes brandFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+    50%{
+        transform:translateY(-5px);
+    }
+}
+
+.brand-name{
+    font-size:27px;
+    font-weight:800;
 }
 
 .left h1{
-    font-size:42px;
-    margin-bottom:15px;
+    font-size:37px;
+    line-height:1.12;
+    letter-spacing:-1px;
+    margin-bottom:16px;
 }
 
 .left p{
-    font-size:17px;
+    color:rgba(255,255,255,.66);
     line-height:1.7;
-    opacity:.9;
+    font-size:13px;
 }
 
 .features{
-    margin-top:35px;
+    margin-top:30px;
 }
 
 .feature{
-    margin:18px 0;
-    font-size:15px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin:16px 0;
+    color:rgba(255,255,255,.83);
+    font-size:13px;
+}
+
+.feature-icon{
+    width:29px;
+    height:29px;
+    border-radius:10px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:rgba(255,255,255,.10);
+    border:1px solid rgba(255,255,255,.12);
 }
 
 .right{
-    padding:40px;
+    padding:40px 42px;
+    background:rgba(5,8,22,.20);
 }
 
 .logo{
-    font-size:30px;
-    font-weight:bold;
-    color:#4f46e5;
-    margin-bottom:5px;
+    font-size:26px;
+    font-weight:800;
+    letter-spacing:-.5px;
 }
 
 .subtitle{
-    color:#64748b;
-    margin-bottom:25px;
+    color:rgba(255,255,255,.50);
+    font-size:13px;
+    margin-top:6px;
+    margin-bottom:20px;
 }
 
 label{
     display:block;
-    margin:14px 0 7px;
-    color:#334155;
-    font-weight:bold;
-    font-size:14px;
+    margin:12px 0 7px;
+    color:rgba(255,255,255,.80);
+    font-size:12px;
+    font-weight:600;
 }
 
-input,textarea{
+input,
+textarea{
     width:100%;
-    padding:13px;
-    border:1px solid #cbd5e1;
-    border-radius:10px;
-    font-size:14px;
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:14px;
     outline:none;
+    color:#fff;
+    background:rgba(255,255,255,.055);
+    font-family:inherit;
+    font-size:13px;
+    transition:.3s ease;
 }
 
-input:focus,textarea:focus{
-    border-color:#4f46e5;
-    box-shadow:0 0 0 3px rgba(79,70,229,.1);
+input{
+    height:46px;
+    padding:0 14px;
 }
 
 textarea{
-    resize:none;
-    height:75px;
+    min-height:66px;
+    padding:12px 14px;
+    resize:vertical;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:rgba(255,255,255,.34);
+}
+
+input:focus,
+textarea:focus{
+    border-color:rgba(129,140,248,.8);
+    background:rgba(255,255,255,.09);
+    box-shadow:0 0 0 4px rgba(99,102,241,.11);
+    transform:translateY(-1px);
 }
 
 button{
     width:100%;
-    padding:14px;
-    margin-top:22px;
+    height:51px;
+    margin-top:20px;
     border:0;
-    border-radius:10px;
-    background:#4f46e5;
-    color:white;
-    font-size:16px;
-    font-weight:bold;
+    border-radius:15px;
+    color:#fff;
+    font-family:inherit;
+    font-size:14px;
+    font-weight:700;
     cursor:pointer;
+    background:linear-gradient(135deg,#8b5cf6,#4f46e5,#2563eb);
+    box-shadow:0 12px 30px rgba(79,70,229,.28);
+    transition:.3s ease;
 }
 
 button:hover{
-    background:#3730a3;
+    transform:translateY(-3px);
+    box-shadow:0 18px 38px rgba(79,70,229,.42);
+}
+
+button:active{
+    transform:scale(.98);
 }
 
 .login{
     text-align:center;
-    margin-top:20px;
-    color:#64748b;
-    font-size:14px;
+    margin-top:18px;
+    color:rgba(255,255,255,.45);
+    font-size:12px;
 }
 
 .login a{
-    color:#4f46e5;
+    color:#a5b4fc;
     text-decoration:none;
-    font-weight:bold;
+    font-weight:700;
 }
 
 .home{
     display:block;
     text-align:center;
-    margin-top:15px;
-    color:#64748b;
+    margin-top:14px;
+    color:rgba(255,255,255,.38);
     text-decoration:none;
-    font-size:14px;
+    font-size:11px;
+}
+
+.home:hover,
+.login a:hover{
+    color:#fff;
 }
 
 @media(max-width:700px){
+
+    body{
+        padding:20px 10px;
+    }
+
     .container{
         grid-template-columns:1fr;
+        width:min(500px,96vw);
     }
 
     .left{
         display:none;
+    }
+
+    .right{
+        padding:35px 25px;
     }
 }
 </style>
@@ -159,23 +350,49 @@ button:hover{
 
 <body>
 
+<div class="orb one"></div>
+<div class="orb two"></div>
+
 <div class="container">
 
     <div class="left">
 
-        <h1>AuraMart</h1>
+        <div class="brand">
+            <div class="brand-icon">A</div>
+            <div class="brand-name">AuraMart</div>
+        </div>
+
+        <h1>
+            Start Your<br>
+            Shopping Journey.
+        </h1>
 
         <p>
-            Your smart and simple online shopping destination.
-            Create your account and start shopping today.
+            Create your AuraMart account and enjoy a smooth,
+            secure and personalized shopping experience.
         </p>
 
         <div class="features">
 
-            <div class="feature">? Easy & Secure Registration</div>
-            <div class="feature">? Fast Shopping Experience</div>
-            <div class="feature">? Track Your Orders</div>
-            <div class="feature">? Personalized Customer Account</div>
+            <div class="feature">
+                <div class="feature-icon">✓</div>
+                Easy & Secure Account
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">✦</div>
+                Fast Shopping Experience
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">⌁</div>
+                Track Your Orders
+            </div>
+
+            <div class="feature">
+                <div class="feature-icon">◈</div>
+                Personalized Account
+            </div>
 
         </div>
 
@@ -183,65 +400,84 @@ button:hover{
 
     <div class="right">
 
-        <div class="logo">Create Account</div>
+        <div class="logo">
+            Create Account
+        </div>
 
         <div class="subtitle">
-            Join AuraMart today
+            Join AuraMart and get started
         </div>
 
         <form action="register" method="post">
 
-            <label for="name">Full Name</label>
+            <label for="name">
+                Full Name
+            </label>
 
             <input
                 type="text"
                 id="name"
                 name="name"
                 placeholder="Enter your full name"
+                autocomplete="name"
                 required
             >
 
-            <label for="email">Email Address</label>
+            <label for="email">
+                Email Address
+            </label>
 
             <input
                 type="email"
                 id="email"
                 name="email"
                 placeholder="Enter your email"
+                autocomplete="email"
                 required
             >
 
-            <label for="phone">Phone Number</label>
+            <label for="phone">
+                Phone Number
+            </label>
 
             <input
                 type="tel"
                 id="phone"
                 name="phone"
                 placeholder="Enter your phone number"
+                autocomplete="tel"
                 required
             >
 
-            <label for="password">Password</label>
+            <label for="password">
+                Password
+            </label>
 
             <input
                 type="password"
                 id="password"
                 name="password"
                 placeholder="Create a password"
+                autocomplete="new-password"
                 required
             >
 
-            <label for="confirmPassword">Confirm Password</label>
+            <label for="confirmPassword">
+                Confirm Password
+            </label>
 
             <input
                 type="password"
                 id="confirmPassword"
                 name="confirmPassword"
                 placeholder="Confirm your password"
+                autocomplete="new-password"
                 required
             >
 
-            <label for="address">Delivery Address</label>
+            <label for="address">
+                Delivery Address
+            </label>
 
             <textarea
                 id="address"
@@ -251,18 +487,20 @@ button:hover{
             ></textarea>
 
             <button type="submit">
-                Create Account
+                Create My Account
             </button>
 
         </form>
 
         <div class="login">
             Already have an account?
-            <a href="login.html">Login</a>
+            <a href="login.html">
+                Login
+            </a>
         </div>
 
         <a href="index.html" class="home">
-            ? Back to Home
+            ← Back to AuraMart
         </a>
 
     </div>
@@ -271,23 +509,26 @@ button:hover{
 
 <script>
 
-document.querySelector("form").addEventListener("submit", function(event){
+document.querySelector("form").addEventListener(
+    "submit",
+    function(event){
 
-    const password =
-        document.getElementById("password").value;
+        const password =
+            document.getElementById("password").value;
 
-    const confirmPassword =
-        document.getElementById("confirmPassword").value;
+        const confirmPassword =
+            document.getElementById("confirmPassword").value;
 
-    if(password !== confirmPassword){
+        if(password !== confirmPassword){
 
-        event.preventDefault();
+            event.preventDefault();
 
-        alert("Passwords do not match!");
+            alert("Passwords do not match!");
+
+        }
 
     }
-
-});
+);
 
 </script>
 

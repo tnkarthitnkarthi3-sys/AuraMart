@@ -1,3 +1,4 @@
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.auramart.model.Product" %>
 
@@ -289,7 +290,7 @@ h1 {
     </div>
 
     <a href="products">
-        ← Back to Products
+        ??? Back to Products
     </a>
 
 </header>
@@ -325,11 +326,11 @@ h1 {
         <div>
 
             <span class="rating">
-                ⭐ 4.5
+                ? 4.5
             </span>
 
             <span class="stars">
-                ★★★★★
+                ?~.?~.?~.?~.?~.
             </span>
 
             <span>
@@ -340,7 +341,7 @@ h1 {
 
 
         <div class="price">
-            ₹<%= product.getPrice() %>
+            ?,?<%= product.getPrice() %>
         </div>
 
 
@@ -360,8 +361,8 @@ h1 {
                 : "out-stock" %>">
 
                 <%= product.getStock() > 0
-                    ? "✓ In Stock"
-                    : "✕ Out of Stock" %>
+                    ? "?o" In Stock"
+                    : "?o. Out of Stock" %>
 
             </span>
 
@@ -450,7 +451,7 @@ h1 {
                 class="btn cart"
                 onclick="addProductToCart()">
 
-                🛒 Add to Cart
+                ?Y>' Add to Cart
 
             </button>
 
@@ -459,7 +460,7 @@ h1 {
                 class="btn buy"
                 onclick="buyProduct()">
 
-                ⚡ Buy Now
+                ?s? Buy Now
 
             </button>
 
@@ -702,7 +703,7 @@ function addProductToCart() {
     saveCart(cart);
 
     alert(
-        "✓ Added to cart"
+        "?o" Added to cart"
     );
 
 }
@@ -754,3 +755,6 @@ function buyProduct() {
 </body>
 
 </html>
+
+
+

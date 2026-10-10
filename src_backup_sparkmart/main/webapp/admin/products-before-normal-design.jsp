@@ -1,3 +1,4 @@
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.auramart.model.Product" %>
 
@@ -421,11 +422,11 @@ nav a:hover {
                         </div>
 
                         <div class="price">
-                            ₹<%= p.getPrice() %>
+                            ?,?<%= p.getPrice() %>
                         </div>
 
                         <div class="flip-hint">
-                            ↻ Hover to view stock & management
+                            ??? Hover to view stock & management
                         </div>
 
                     </div>
@@ -551,3 +552,7 @@ function searchProducts() {
 
 </body>
 </html>
+
+
+
+

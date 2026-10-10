@@ -6,6 +6,7 @@ import java.sql.Timestamp;
 public class Product {
 
     private int id;
+    private int sellerId;
     private String name;
     private String category;
     private String description;
@@ -24,7 +25,14 @@ public class Product {
         this.id = id;
     }
 
-    public String getName() {
+    public int getSellerId() {
+    return sellerId;
+}
+
+public void setSellerId(int sellerId) {
+    this.sellerId = sellerId;
+}
+public String getName() {
         return name;
     }
 
@@ -96,3 +104,4 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 }
+

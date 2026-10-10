@@ -1,4 +1,4 @@
-console.log("AURAMART SCRIPT LOADED");
+﻿console.log("AURAMART SCRIPT LOADED");
 
 let cart = JSON.parse(localStorage.getItem("auraMartCart")) || [];
 
@@ -43,3 +43,4 @@ function updateCartCount() {
 document.addEventListener("DOMContentLoaded", function() {
     updateCartCount();
 });
+

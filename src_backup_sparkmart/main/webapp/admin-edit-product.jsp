@@ -1,4 +1,5 @@
-﻿<%@ page contentType="text/html;charset=UTF-8" %>
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="com.auramart.Product" %>
 
 <%
@@ -120,7 +121,7 @@
 
 <div class="container">
 
-    <h2>âœï¸ Edit Product</h2>
+    <h2>?o?? Edit Product</h2>
     <p>Update the selected AuraMart product.</p>
 
     <form action="admin-edit-product" method="post" enctype="multipart/form-data">
@@ -206,7 +207,7 @@
         <div class="row">
 
             <div class="form-group">
-                <label>Price (â‚¹)</label>
+                <label>Price (?,?)</label>
 
                 <input
                     type="number"
@@ -258,7 +259,7 @@
                 accept=".jpg,.jpeg,.png,.webp">
 
             <small>
-                JPG, JPEG, PNG or WEBP — Maximum 5 MB
+                JPG, JPEG, PNG or WEBP - Maximum 5 MB
             </small>
         </div>
 
@@ -309,6 +310,10 @@ document.getElementById("imageFile").addEventListener("change", function () {
 </script>
 </body>
 </html>
+
+
+
+
 
 
 

@@ -24,9 +24,7 @@ public class AdminDAO {
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery()
         ) {
-
             while (rs.next()) {
-
                 Product p = new Product();
 
                 p.setId(rs.getInt("id"));
@@ -47,73 +45,53 @@ public class AdminDAO {
         return products;
     }
 
-
-    public int getTotalProducts()
-            throws SQLException {
-
-        return getCount(
-                "SELECT COUNT(*) FROM products"
-        );
+    public int getTotalProducts() throws SQLException {
+        return getCount("SELECT COUNT(*) FROM products");
     }
 
-
-    public int getInStockProducts()
-            throws SQLException {
-
+    public int getInStockProducts() throws SQLException {
         return getCount(
                 "SELECT COUNT(*) FROM products " +
                 "WHERE active = 1 AND stock > 0"
         );
     }
 
-
-    public int getOutOfStockProducts()
-            throws SQLException {
-
+    public int getOutOfStockProducts() throws SQLException {
         return getCount(
                 "SELECT COUNT(*) FROM products " +
                 "WHERE active = 1 AND stock = 0"
         );
     }
 
+    public int getTotalOrders() throws SQLException {
+        return getCount("SELECT COUNT(*) FROM orders");
+    }
 
-    public int getTotalOrders()
-            throws SQLException {
+    public int getTotalUsers() throws SQLException {
+        return getCount("SELECT COUNT(*) FROM users");
+    }
 
+    public int getTotalSellers() throws SQLException {
         return getCount(
-                "SELECT COUNT(*) FROM orders"
+                "SELECT COUNT(*) FROM users " +
+                "WHERE UPPER(role) = 'SELLER'"
         );
     }
 
-
-    public int getTotalUsers()
-            throws SQLException {
-
-        return getCount(
-                "SELECT COUNT(*) FROM users"
-        );
-    }
-
-
-    public int getPendingOrders()
-            throws SQLException {
-
+    public int getPendingOrders() throws SQLException {
         return getCount(
                 "SELECT COUNT(*) FROM orders " +
                 "WHERE UPPER(status) = 'PENDING'"
         );
     }
 
-
-    private int getCount(String sql)
-            throws SQLException {
+    private int getCount(String sql) throws SQLException {
 
         try (
                 Connection conn = DBConnection.getConnection();
                 PreparedStatement ps = conn.prepareStatement(sql);
                 ResultSet rs = ps.executeQuery()
         ) {
-
             if (rs.next()) {
                 return rs.getInt(1);
             }

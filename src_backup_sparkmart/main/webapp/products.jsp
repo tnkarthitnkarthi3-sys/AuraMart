@@ -1,3 +1,4 @@
+﻿<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ page import="java.util.List" %>
 <%@ page import="com.auramart.model.Product" %>
@@ -1005,7 +1006,7 @@ select {
             class="search-button"
             onclick="runSearch()">
 
-            [Search]
+            [Search]?
 
         </button>
 
@@ -1152,11 +1153,11 @@ select {
                 </option>
 
                 <option value="4">
-                    &#11088; 4&#9733; & above
+                    &#11088;? 4&#9733; & above
                 </option>
 
                 <option value="4.5">
-                    &#11088; 4.5&#9733; & above
+                    &#11088;? 4.5&#9733; & above
                 </option>
 
             </select>
@@ -1299,7 +1300,7 @@ select {
                                 class="rating"
                                 data-rating="<%= product.getId() %>">
 
-                                &#11088; 4.0
+                                &#11088;? 4.0
 
                             </span>
 
@@ -1768,7 +1769,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (ratingElement) {
             ratingElement.innerText =
-                "&#11088; " + rating.toFixed(1);
+                "&#11088;? " + rating.toFixed(1);
         }
 
         if (starsElement) {
@@ -2868,7 +2869,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let q = original
         .replace(/,/g,"")
-        .replace(/₹/g," rs ");
+        .replace(/?,?/g," rs ");
 
 
     const replacements = {
@@ -3370,7 +3371,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if(!result.length){
 
         return (
-            "Sorry, matching product கிடைக்கவில்லை." +
+            "Sorry, matching product ?.??Y?^?.??.??????^." +
             "<br><br>" +
             "Try:" +
             "<br>" +
@@ -3385,14 +3386,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
     let html =
-        "🤖 Purinjukitten! Here are matching products:" +
+        "?Y?- Purinjukitten! Here are matching products:" +
         "<br><br>";
 
 
     if(maxPrice !== null){
 
         html +=
-            "Budget: ₹" +
+            "Budget: ?,?" +
             maxPrice.toLocaleString(
                 "en-IN"
             ) +
@@ -3434,12 +3435,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 "Rating: " +
                 product.rating.toFixed(1) +
 
-                " · ₹" +
+                " ? ?,?" +
                 product.price.toLocaleString(
                     "en-IN"
                 ) +
 
-                " · " +
+                " ? " +
                 escapeHTML(
                     product.category
                 ) +
@@ -3554,3 +3555,7 @@ window.focusProduct =
 </script></body>
 
 </html>
+
+
+
+

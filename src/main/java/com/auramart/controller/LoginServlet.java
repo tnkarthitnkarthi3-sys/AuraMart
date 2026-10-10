@@ -1,7 +1,5 @@
 package com.auramart.controller;
 
-import com.auramart.Admin;
-import com.auramart.AdminDAO;
 import com.auramart.dao.UserDAO;
 import com.auramart.model.User;
 
@@ -17,84 +15,49 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 
-    private final UserDAO userDAO = new UserDAO();
-    private final AdminDAO adminDAO = new AdminDAO();
+    private final UserDAO userDAO =
+            new UserDAO();
+
 
     @Override
     protected void doPost(
             HttpServletRequest request,
-            HttpServletResponse response)
-            throws ServletException, IOException {
+            HttpServletResponse response
+    ) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+        String email =
+                clean(
+                        request.getParameter("email")
+                ).toLowerCase();
 
-        System.out.println("=================================");
-        System.out.println("UNIFIED LOGIN REQUEST");
-        System.out.println("EMAIL = [" + email + "]");
-        System.out.println("=================================");
-
-        if (email == null ||
-            password == null ||
-            email.trim().isEmpty() ||
-            password.trim().isEmpty()) {
-
-            response.sendRedirect("login.html?error=invalid");
-            return;
-        }
-
-        email = email.trim().toLowerCase();
-        password = password.trim();
+        String password =
+                request.getParameter("password");
 
 
-        /*
-         * =========================================
-         * STEP 1: ADMIN LOGIN
-         * =========================================
-         *
-         * Admin does NOT need customer registration.
-         */
+        // =====================================
+        // VALIDATION
+        // =====================================
 
-        Admin admin = adminDAO.login(email, password);
-
-        if (admin != null) {
-
-            System.out.println(
-                    "ADMIN LOGIN SUCCESS"
-            );
-
-            HttpSession session =
-                    request.getSession(true);
-
-            session.setAttribute(
-                    "admin",
-                    admin
-            );
-
-            session.removeAttribute(
-                    "loggedInUser"
-            );
-
-            System.out.println(
-                    "ADMIN SESSION ID = "
-                    + session.getId()
-            );
+        if (
+                email.isEmpty() ||
+                password == null ||
+                password.isEmpty()
+        ) {
 
             response.sendRedirect(
-                    "admin-dashboard.html"
+                    request.getContextPath()
+                    + "/login.html?error=validation"
             );
 
             return;
         }
 
 
-        /*
-         * =========================================
-         * STEP 2: CUSTOMER LOGIN
-         * =========================================
-         */
+        // =====================================
+        // AUTHENTICATE
+        // =====================================
 
         User user =
                 userDAO.loginUser(
@@ -102,59 +65,123 @@ public class LoginServlet extends HttpServlet {
                         password
                 );
 
-        if (user != null) {
 
-            System.out.println(
-                    "CUSTOMER LOGIN SUCCESS"
+        if (user == null) {
+
+            response.sendRedirect(
+                    request.getContextPath()
+                    + "/login.html?error=invalid"
             );
-
-            HttpSession session =
-                    request.getSession(true);
-
-            session.setAttribute(
-                    "loggedInUser",
-                    user
-            );
-
-            session.removeAttribute(
-                    "admin"
-            );
-
-            String checkout =
-                    request.getParameter(
-                            "checkout"
-                    );
-
-            if ("true".equalsIgnoreCase(checkout)) {
-
-                response.sendRedirect(
-                        "cart.html"
-                );
-
-            } else {
-
-                response.sendRedirect(
-                        "products"
-                );
-            }
 
             return;
         }
 
 
-        /*
-         * =========================================
-         * STEP 3: LOGIN FAILED
-         * =========================================
-         */
+        // =====================================
+        // SESSION FIXATION PROTECTION
+        // =====================================
 
-        System.out.println(
-                "LOGIN FAILED"
+        HttpSession oldSession =
+                request.getSession(false);
+
+        if (oldSession != null) {
+            oldSession.invalidate();
+        }
+
+        HttpSession session =
+                request.getSession(true);
+
+
+        // =====================================
+        // SESSION DATA
+        // =====================================
+
+        session.setAttribute(
+                "loggedInUser",
+                user
         );
 
-        response.sendRedirect(
-                "login.html?error=invalid"
+        session.setAttribute(
+                "userId",
+                user.getId()
         );
+
+        session.setAttribute(
+                "userName",
+                user.getName()
+        );
+
+        session.setAttribute(
+                "userEmail",
+                user.getEmail()
+        );
+
+        session.setAttribute(
+                "userRole",
+                user.getRole()
+        );
+
+
+        // =====================================
+        // SESSION TIMEOUT
+        // =====================================
+
+        session.setMaxInactiveInterval(
+                30 * 60
+        );
+
+
+        // =====================================
+        // ROLE REDIRECT
+        // =====================================
+
+        String role =
+                user.getRole()
+                        .toUpperCase();
+
+
+        switch (role) {
+
+            case "ADMIN":
+
+                response.sendRedirect(
+                        request.getContextPath()
+                        + "/admin-dashboard.html"
+                );
+
+                break;
+
+
+            case "SELLER":
+
+                response.sendRedirect(
+                        request.getContextPath()
+                        + "/seller/dashboard.html"
+                );
+
+                break;
+
+
+            case "BUYER":
+
+            default:
+
+                response.sendRedirect(
+                        request.getContextPath()
+                        + "/products"
+                );
+
+                break;
+        }
+    }
+
+
+    private String clean(String value) {
+
+        if (value == null) {
+            return "";
+        }
+
+        return value.trim();
     }
 }
-

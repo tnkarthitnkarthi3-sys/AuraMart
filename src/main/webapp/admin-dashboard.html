@@ -1,183 +1,651 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>AuraMart Admin Dashboard</title>
 
     <style>
         * {
             box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: Arial, sans-serif;
         }
 
         body {
-            background: #f3f4f6;
-            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f7fb;
+            color: #222;
         }
 
         .header {
             background: #111827;
             color: white;
-            padding: 18px 30px;
+            padding: 20px 35px;
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .logo {
+        .brand {
             font-size: 25px;
             font-weight: bold;
         }
 
-        .admin-name {
-            font-size: 15px;
+        .admin {
+            font-size: 14px;
             color: #d1d5db;
         }
 
         .container {
-            padding: 35px;
+            max-width: 1100px;
+            margin: 40px auto;
+            padding: 0 20px;
         }
 
-        .welcome {
+        h1 {
             margin-bottom: 30px;
         }
 
-        .welcome h1 {
-            color: #111827;
-            margin-bottom: 8px;
-        }
-
-        .welcome p {
-            color: #6b7280;
-        }
-
-        .cards {
+        .stats {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 22px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
         }
 
         .card {
             background: white;
-            padding: 28px;
-            border-radius: 15px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
+            border-radius: 14px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
         }
 
-        .card h3 {
-            color: #374151;
-            margin-bottom: 12px;
-        }
-
-        .card p {
-            font-size: 30px;
-            font-weight: bold;
-            color: #2563eb;
-        }
-
-        .section {
-            margin-top: 35px;
-            background: white;
-            padding: 28px;
-            border-radius: 15px;
-            box-shadow: 0 5px 18px rgba(0,0,0,0.08);
-        }
-
-        .section h2 {
-            color: #111827;
+        .icon {
+            font-size: 40px;
             margin-bottom: 15px;
         }
 
-        .menu {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
+        .title {
+            font-size: 17px;
+            color: #666;
+            margin-bottom: 10px;
         }
 
-        .menu button {
-            border: none;
-            padding: 12px 18px;
-            border-radius: 8px;
-            background: #2563eb;
-            color: white;
-            cursor: pointer;
+        .number {
+            font-size: 38px;
             font-weight: bold;
         }
 
-        .menu button:hover {
-            background: #1d4ed8;
+        .error {
+            margin-top: 25px;
+            text-align: center;
+            color: #dc2626;
+        }
+
+        @media (max-width: 700px) {
+            .stats {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
+<style>
+
+/* =========================================================
+   AURAMART PREMIUM ADMIN + SELLER UI
+   CSS ONLY - BACKEND / JSP / JS PRESERVED
+   ========================================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:
+        radial-gradient(circle at 10% 10%,rgba(124,58,237,.22),transparent 28%),
+        radial-gradient(circle at 90% 15%,rgba(37,99,235,.20),transparent 28%),
+        radial-gradient(circle at 50% 100%,rgba(168,85,247,.15),transparent 35%),
+        linear-gradient(135deg,#020617,#0b1024 48%,#111827)!important;
+    color:#f8fafc!important;
+    min-height:100vh;
+}
+
+/* subtle fabric/glass texture */
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:-120px;
+    pointer-events:none;
+    z-index:-1;
+    opacity:.45;
+    background:
+        repeating-linear-gradient(
+            110deg,
+            rgba(255,255,255,.035) 0,
+            rgba(255,255,255,.035) 1px,
+            transparent 1px,
+            transparent 8px
+        ),
+        repeating-linear-gradient(
+            20deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 10px
+        );
+    transform:rotate(-3deg) scale(1.2);
+}
+
+/* =========================================================
+   ADMIN HEADER
+   ========================================================= */
+
+.header{
+    background:rgba(2,6,23,.70)!important;
+    border-bottom:1px solid rgba(255,255,255,.10)!important;
+    backdrop-filter:blur(24px)!important;
+    -webkit-backdrop-filter:blur(24px)!important;
+    box-shadow:0 10px 40px rgba(0,0,0,.25)!important;
+}
+
+.header .brand{
+    color:#fff!important;
+    font-weight:900!important;
+    letter-spacing:-.8px;
+    text-shadow:0 0 25px rgba(139,92,246,.4);
+}
+
+.admin{
+    color:#cbd5e1!important;
+}
+
+/* =========================================================
+   SELLER SIDEBAR
+   ========================================================= */
+
+.sidebar{
+    background:
+        linear-gradient(
+            180deg,
+            rgba(2,6,23,.92),
+            rgba(15,23,42,.88)
+        )!important;
+    border-right:1px solid rgba(255,255,255,.09)!important;
+    box-shadow:15px 0 50px rgba(0,0,0,.25)!important;
+    backdrop-filter:blur(25px)!important;
+    -webkit-backdrop-filter:blur(25px)!important;
+}
+
+.sidebar .brand{
+    color:#fff!important;
+    font-weight:900!important;
+    letter-spacing:-.8px;
+    text-shadow:0 0 25px rgba(56,189,248,.25);
+}
+
+.brand span{
+    color:#a78bfa!important;
+}
+
+.nav a{
+    color:#94a3b8!important;
+    border:1px solid transparent!important;
+    transition:.28s ease!important;
+}
+
+.nav a:hover,
+.nav a.active{
+    background:
+        linear-gradient(
+            135deg,
+            rgba(124,58,237,.28),
+            rgba(37,99,235,.18)
+        )!important;
+    color:#fff!important;
+    border-color:rgba(167,139,250,.22)!important;
+    box-shadow:
+        0 10px 30px rgba(124,58,237,.15),
+        inset 0 1px 0 rgba(255,255,255,.06)!important;
+    transform:translateX(4px);
+}
+
+/* =========================================================
+   MAIN AREA
+   ========================================================= */
+
+.main,
+.container{
+    position:relative;
+}
+
+h1{
+    color:transparent!important;
+    background:linear-gradient(
+        90deg,
+        #fff,
+        #c4b5fd,
+        #93c5fd
+    );
+    -webkit-background-clip:text;
+    background-clip:text;
+    font-weight:900!important;
+    letter-spacing:-1.5px;
+}
+
+h2,h3,h4{
+    color:#f8fafc!important;
+}
+
+/* =========================================================
+   SELLER TOPBAR
+   ========================================================= */
+
+.topbar{
+    color:#fff!important;
+}
+
+.topbar p,
+.topbar span,
+.subtitle{
+    color:#94a3b8!important;
+}
+
+/* =========================================================
+   PREMIUM CARDS
+   ========================================================= */
+
+.card,
+.stat-card,
+.stats .card,
+.product-card,
+.order-card,
+.panel,
+.box,
+.section,
+.profile-card{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.105),
+            rgba(255,255,255,.035)
+        )!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+    box-shadow:
+        0 25px 70px rgba(0,0,0,.32),
+        inset 0 1px 0 rgba(255,255,255,.07)!important;
+    backdrop-filter:blur(25px)!important;
+    -webkit-backdrop-filter:blur(25px)!important;
+    border-radius:22px!important;
+    transition:.30s ease!important;
+}
+
+.card:hover,
+.stat-card:hover,
+.stats .card:hover,
+.product-card:hover,
+.order-card:hover{
+    transform:translateY(-5px);
+    border-color:rgba(139,92,246,.30)!important;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.38),
+        0 0 35px rgba(124,58,237,.08)!important;
+}
+
+/* =========================================================
+   ADMIN STAT CARDS
+   ========================================================= */
+
+.stats{
+    gap:24px!important;
+}
+
+.stats .card{
+    padding:30px!important;
+    overflow:hidden;
+    position:relative;
+}
+
+.stats .card::before{
+    content:"";
+    position:absolute;
+    width:120px;
+    height:120px;
+    right:-45px;
+    top:-45px;
+    border-radius:50%;
+    background:rgba(139,92,246,.12);
+    filter:blur(5px);
+}
+
+.icon{
+    filter:drop-shadow(0 8px 15px rgba(124,58,237,.25));
+}
+
+.title{
+    color:#94a3b8!important;
+}
+
+.number{
+    color:#fff!important;
+    font-weight:900!important;
+    text-shadow:0 0 25px rgba(167,139,250,.18);
+}
+
+/* =========================================================
+   TABLES
+   ========================================================= */
+
+table{
+    width:100%;
+    border-collapse:separate!important;
+    border-spacing:0 8px!important;
+    color:#e2e8f0!important;
+}
+
+thead th{
+    color:#94a3b8!important;
+    background:rgba(255,255,255,.035)!important;
+    border-bottom:1px solid rgba(255,255,255,.08)!important;
+    padding:15px!important;
+}
+
+tbody tr{
+    background:rgba(255,255,255,.035)!important;
+    transition:.25s ease!important;
+}
+
+tbody tr:hover{
+    background:rgba(124,58,237,.09)!important;
+    transform:scale(1.005);
+}
+
+tbody td{
+    color:#cbd5e1!important;
+    border-bottom:1px solid rgba(255,255,255,.05)!important;
+    padding:15px!important;
+}
+
+/* =========================================================
+   BUTTONS
+   ========================================================= */
+
+button,
+.btn,
+.button,
+a.btn,
+.add-btn,
+.edit-btn,
+.delete-btn,
+.action-btn{
+    border-radius:12px!important;
+    transition:.25s ease!important;
+}
+
+button:hover,
+.btn:hover,
+.button:hover,
+a.btn:hover,
+.add-btn:hover,
+.edit-btn:hover,
+.delete-btn:hover,
+.action-btn:hover{
+    transform:translateY(-2px);
+}
+
+.add-btn,
+.primary,
+.btn-primary,
+button[type="submit"]{
+    background:linear-gradient(
+        135deg,
+        #7c3aed,
+        #2563eb
+    )!important;
+    color:#fff!important;
+    border:0!important;
+    box-shadow:0 12px 30px rgba(99,102,241,.22)!important;
+}
+
+/* =========================================================
+   FORMS
+   ========================================================= */
+
+input,
+select,
+textarea{
+    background:rgba(2,6,23,.65)!important;
+    color:#fff!important;
+    border:1px solid rgba(255,255,255,.11)!important;
+    border-radius:12px!important;
+    outline:none!important;
+}
+
+input::placeholder,
+textarea::placeholder{
+    color:#64748b!important;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+    border-color:#8b5cf6!important;
+    box-shadow:0 0 0 3px rgba(139,92,246,.12)!important;
+}
+
+label{
+    color:#cbd5e1!important;
+    font-weight:700!important;
+}
+
+/* =========================================================
+   SELLER PRODUCTS
+   ========================================================= */
+
+.product-image,
+.product-card img{
+    border-radius:16px!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+    box-shadow:0 12px 30px rgba(0,0,0,.25)!important;
+}
+
+.product-card h3,
+.product-card h4{
+    color:#fff!important;
+}
+
+.product-card p{
+    color:#94a3b8!important;
+}
+
+.price{
+    color:#c4b5fd!important;
+    font-weight:900!important;
+}
+
+/* =========================================================
+   SELLER ORDERS
+   ========================================================= */
+
+.order-card,
+.order-box{
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.09),
+            rgba(255,255,255,.03)
+        )!important;
+    border:1px solid rgba(255,255,255,.09)!important;
+    border-radius:20px!important;
+    box-shadow:0 20px 55px rgba(0,0,0,.28)!important;
+}
+
+.order-card strong,
+.order-box strong{
+    color:#fff!important;
+}
+
+.order-card span,
+.order-box span{
+    color:#94a3b8!important;
+}
+
+/* status badges */
+
+.status,
+.badge{
+    border-radius:999px!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+    padding:6px 12px!important;
+    font-weight:800!important;
+    backdrop-filter:blur(10px);
+}
+
+/* =========================================================
+   LINKS
+   ========================================================= */
+
+a{
+    transition:.22s ease;
+}
+
+.main a{
+    color:#a78bfa;
+}
+
+.main a:hover{
+    color:#c4b5fd;
+}
+
+/* =========================================================
+   ERROR / SUCCESS
+   ========================================================= */
+
+.error{
+    background:rgba(239,68,68,.08)!important;
+    color:#fca5a5!important;
+    border:1px solid rgba(239,68,68,.18)!important;
+    border-radius:14px!important;
+}
+
+.success{
+    background:rgba(34,197,94,.08)!important;
+    color:#86efac!important;
+    border:1px solid rgba(34,197,94,.18)!important;
+    border-radius:14px!important;
+}
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar{
+    width:9px;
+}
+
+::-webkit-scrollbar-track{
+    background:#020617;
+}
+
+::-webkit-scrollbar-thumb{
+    background:linear-gradient(#7c3aed,#2563eb);
+    border-radius:20px;
+}
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media(max-width:800px){
+
+    .sidebar{
+        position:relative!important;
+        width:100%!important;
+        height:auto!important;
+        min-height:auto!important;
+        padding:18px!important;
+    }
+
+    .sidebar .brand{
+        margin-bottom:15px!important;
+    }
+
+    .nav{
+        display:flex;
+        flex-wrap:wrap;
+        gap:7px;
+    }
+
+    .nav a{
+        margin-bottom:0!important;
+        padding:10px 12px!important;
+    }
+
+    .main{
+        margin-left:0!important;
+        padding:20px!important;
+    }
+
+    .stats{
+        grid-template-columns:1fr!important;
+    }
+
+    .header{
+        padding:16px 20px!important;
+        gap:12px;
+    }
+
+    table{
+        min-width:700px;
+    }
+
+    .card{
+        border-radius:18px!important;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
 <header class="header">
-
-    <div class="logo">
-        AuraMart Admin
-    </div>
-
-    <div class="admin-name">
-        Administrator
-    </div>
-
+    <div class="brand">AuraMart Admin</div>
+    <div class="admin">Administrator</div>
 </header>
 
-<main class="container">
+<div class="container">
 
-    <div class="welcome">
-        <h1>Welcome to Admin Dashboard 👋</h1>
-        <p>Manage your AuraMart store from here.</p>
-    </div>
+    <h1>Admin Dashboard</h1>
 
-    <div class="cards">
+    <div class="stats">
 
         <div class="card">
-            <h3>Total Products</h3>
-            <p id="statValue1">0</p>
+            <div class="icon">👥</div>
+            <div class="title">Total Login Members</div>
+            <div class="number" id="totalMembers">0</div>
         </div>
 
         <div class="card">
-            <h3>Total Users</h3>
-            <p id="statValue2">0</p>
+            <div class="icon">🏪</div>
+            <div class="title">Total Sellers</div>
+            <div class="number" id="totalSellers">0</div>
         </div>
 
         <div class="card">
-            <h3>Total Orders</h3>
-            <p id="statValue3">0</p>
-        </div>
-
-        <div class="card">
-            <h3>Pending Orders</h3>
-            <p id="statValue4">0</p>
+            <div class="icon">🛒</div>
+            <div class="title">Total Orders</div>
+            <div class="number" id="totalOrders">0</div>
         </div>
 
     </div>
 
-    <div class="section">
+    <div class="error" id="errorMessage"></div>
 
-        <h2>Quick Management</h2>
-
-        <div class="menu">
-
-            <button type="button" onclick="window.location.href='admin-products'">Manage Products</button>
-
-            <button type="button">
-                Manage Users
-            </button>
-
-            <button type="button" onclick="window.location.href='orders.html'">Manage Orders</button>
-
-        </div>
-
-    </div>
-
-</main>
+</div>
 
 <script>
 fetch("admin-dashboard-data", {
@@ -193,21 +661,23 @@ fetch("admin-dashboard-data", {
 })
 .then(function(data) {
 
-    document.getElementById("statValue1").innerText =
-        data.totalProducts;
+    document.getElementById("totalMembers").innerText =
+        data.totalUsers ?? data.totalMembers ?? 0;
 
-    document.getElementById("statValue2").innerText =
-        data.totalUsers;
+    document.getElementById("totalSellers").innerText =
+        data.totalSellers ?? 0;
 
-    document.getElementById("statValue3").innerText =
-        data.totalOrders;
-
-    document.getElementById("statValue4").innerText =
-        data.pendingOrders;
+    document.getElementById("totalOrders").innerText =
+        data.totalOrders ?? 0;
 
 })
 .catch(function(error) {
     console.error("ADMIN DASHBOARD ERROR:", error);
+    document.getElementById("errorMessage").innerText =
+        "Unable to load dashboard data.";
 });
-</script></body>
+</script>
+
+</body>
 </html>
+
